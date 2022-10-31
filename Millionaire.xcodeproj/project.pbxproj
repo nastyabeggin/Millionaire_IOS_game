@@ -13,6 +13,15 @@
 		70AF5490290FC243002975EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AF548E290FC243002975EF /* Main.storyboard */; };
 		70AF5492290FC245002975EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70AF5491290FC245002975EF /* Assets.xcassets */; };
 		70AF5495290FC245002975EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AF5493290FC245002975EF /* LaunchScreen.storyboard */; };
+		70AF549D290FC31F002975EF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 70AF549C290FC31F002975EF /* .gitignore */; };
+		70AF54AA290FCCEE002975EF /* victoryMillion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A4290FCCED002975EF /* victoryMillion.mp3 */; };
+		70AF54AB290FCCEE002975EF /* waitForInspection.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A5290FCCED002975EF /* waitForInspection.mp3 */; };
+		70AF54AC290FCCEE002975EF /* wrongAnswer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A6290FCCED002975EF /* wrongAnswer.mp3 */; };
+		70AF54AD290FCCEE002975EF /* correctAnswer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A7290FCCEE002975EF /* correctAnswer.mp3 */; };
+		70AF54AE290FCCEE002975EF /* waitForResponse.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A8290FCCEE002975EF /* waitForResponse.mp3 */; };
+		70AF54AF290FCCEE002975EF /* startApp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A9290FCCEE002975EF /* startApp.mp3 */; };
+		70AF54B1290FCD3A002975EF /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF54B0290FCD3A002975EF /* SoundModel.swift */; };
+		70AF54B3290FCF26002975EF /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF54B2290FCF26002975EF /* QuestionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +33,15 @@
 		70AF5491290FC245002975EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70AF5494290FC245002975EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70AF5496290FC245002975EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70AF549C290FC31F002975EF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		70AF54A4290FCCED002975EF /* victoryMillion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = victoryMillion.mp3; sourceTree = "<group>"; };
+		70AF54A5290FCCED002975EF /* waitForInspection.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = waitForInspection.mp3; sourceTree = "<group>"; };
+		70AF54A6290FCCED002975EF /* wrongAnswer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = wrongAnswer.mp3; sourceTree = "<group>"; };
+		70AF54A7290FCCEE002975EF /* correctAnswer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = correctAnswer.mp3; sourceTree = "<group>"; };
+		70AF54A8290FCCEE002975EF /* waitForResponse.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = waitForResponse.mp3; sourceTree = "<group>"; };
+		70AF54A9290FCCEE002975EF /* startApp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = startApp.mp3; sourceTree = "<group>"; };
+		70AF54B0290FCD3A002975EF /* SoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundModel.swift; sourceTree = "<group>"; };
+		70AF54B2290FCF26002975EF /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +58,7 @@
 		70AF547C290FC243002975EF = {
 			isa = PBXGroup;
 			children = (
+				70AF549C290FC31F002975EF /* .gitignore */,
 				70AF5487290FC243002975EF /* Millionaire */,
 				70AF5486290FC243002975EF /* Products */,
 			);
@@ -56,15 +75,71 @@
 		70AF5487290FC243002975EF /* Millionaire */ = {
 			isa = PBXGroup;
 			children = (
-				70AF5488290FC243002975EF /* AppDelegate.swift */,
-				70AF548A290FC243002975EF /* SceneDelegate.swift */,
-				70AF548C290FC243002975EF /* ViewController.swift */,
-				70AF548E290FC243002975EF /* Main.storyboard */,
-				70AF5491290FC245002975EF /* Assets.xcassets */,
-				70AF5493290FC245002975EF /* LaunchScreen.storyboard */,
+				70AF54A0290FC4B9002975EF /* Controller */,
+				70AF549F290FC49E002975EF /* Model */,
+				70AF549E290FC486002975EF /* View */,
+				70AF54A1290FC4D5002975EF /* Resources */,
 				70AF5496290FC245002975EF /* Info.plist */,
+				70AF54A2290FC4FC002975EF /* App */,
 			);
 			path = Millionaire;
+			sourceTree = "<group>";
+		};
+		70AF549E290FC486002975EF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				70AF548E290FC243002975EF /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		70AF549F290FC49E002975EF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				70AF54B0290FCD3A002975EF /* SoundModel.swift */,
+				70AF54B2290FCF26002975EF /* QuestionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		70AF54A0290FC4B9002975EF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				70AF548C290FC243002975EF /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		70AF54A1290FC4D5002975EF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				70AF5491290FC245002975EF /* Assets.xcassets */,
+				70AF54A3290FC519002975EF /* Sound */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		70AF54A2290FC4FC002975EF /* App */ = {
+			isa = PBXGroup;
+			children = (
+				70AF5488290FC243002975EF /* AppDelegate.swift */,
+				70AF548A290FC243002975EF /* SceneDelegate.swift */,
+				70AF5493290FC245002975EF /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		70AF54A3290FC519002975EF /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				70AF54A7290FCCEE002975EF /* correctAnswer.mp3 */,
+				70AF54A9290FCCEE002975EF /* startApp.mp3 */,
+				70AF54A4290FCCED002975EF /* victoryMillion.mp3 */,
+				70AF54A5290FCCED002975EF /* waitForInspection.mp3 */,
+				70AF54A8290FCCEE002975EF /* waitForResponse.mp3 */,
+				70AF54A6290FCCED002975EF /* wrongAnswer.mp3 */,
+			);
+			path = Sound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +200,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70AF549D290FC31F002975EF /* .gitignore in Resources */,
+				70AF54AD290FCCEE002975EF /* correctAnswer.mp3 in Resources */,
+				70AF54AC290FCCEE002975EF /* wrongAnswer.mp3 in Resources */,
+				70AF54AF290FCCEE002975EF /* startApp.mp3 in Resources */,
 				70AF5495290FC245002975EF /* LaunchScreen.storyboard in Resources */,
+				70AF54AE290FCCEE002975EF /* waitForResponse.mp3 in Resources */,
 				70AF5492290FC245002975EF /* Assets.xcassets in Resources */,
+				70AF54AB290FCCEE002975EF /* waitForInspection.mp3 in Resources */,
+				70AF54AA290FCCEE002975EF /* victoryMillion.mp3 in Resources */,
 				70AF5490290FC243002975EF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,8 +221,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				70AF548D290FC243002975EF /* ViewController.swift in Sources */,
+				70AF54B1290FCD3A002975EF /* SoundModel.swift in Sources */,
 				70AF5489290FC243002975EF /* AppDelegate.swift in Sources */,
 				70AF548B290FC243002975EF /* SceneDelegate.swift in Sources */,
+				70AF54B3290FCF26002975EF /* QuestionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,9 +386,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mr.kelma.Millionaire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -330,9 +417,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mr.kelma.Millionaire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
