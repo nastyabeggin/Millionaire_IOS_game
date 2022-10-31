@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		70AF5489290FC243002975EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF5488290FC243002975EF /* AppDelegate.swift */; };
 		70AF548B290FC243002975EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF548A290FC243002975EF /* SceneDelegate.swift */; };
-		70AF548D290FC243002975EF /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF548C290FC243002975EF /* FirstController.swift */; };
+		70AF548D290FC243002975EF /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF548C290FC243002975EF /* StartViewController.swift */; };
 		70AF5492290FC245002975EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70AF5491290FC245002975EF /* Assets.xcassets */; };
 		70AF5495290FC245002975EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70AF5493290FC245002975EF /* LaunchScreen.storyboard */; };
 		70AF549D290FC31F002975EF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 70AF549C290FC31F002975EF /* .gitignore */; };
@@ -21,18 +21,17 @@
 		70AF54AF290FCCEE002975EF /* startApp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A9290FCCEE002975EF /* startApp.mp3 */; };
 		70AF54B1290FCD3A002975EF /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF54B0290FCD3A002975EF /* SoundModel.swift */; };
 		70AF54B3290FCF26002975EF /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF54B2290FCF26002975EF /* QuestionModel.swift */; };
-		EC3B212A291043DA0080E158 /* SeconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B2129291043DA0080E158 /* SeconViewController.swift */; };
-		EC3B212C2910442D0080E158 /* TwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212B2910442D0080E158 /* TwoViewController.swift */; };
-		EC3B212E2910443B0080E158 /* ThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212D2910443B0080E158 /* ThreeViewController.swift */; };
-		EC3B21302910444B0080E158 /* FourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212F2910444B0080E158 /* FourViewController.swift */; };
-		EC3B21322910445B0080E158 /* FifeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B21312910445B0080E158 /* FifeViewController.swift */; };
+		EC3B212A291043DA0080E158 /* RuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B2129291043DA0080E158 /* RuleViewController.swift */; };
+		EC3B212C2910442D0080E158 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212B2910442D0080E158 /* GameViewController.swift */; };
+		EC3B212E2910443B0080E158 /* InterimResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212D2910443B0080E158 /* InterimResultViewController.swift */; };
+		EC3B21302910444B0080E158 /* FinalResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212F2910444B0080E158 /* FinalResultViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		70AF5485290FC243002975EF /* Millionaire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Millionaire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70AF5488290FC243002975EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		70AF548A290FC243002975EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		70AF548C290FC243002975EF /* FirstController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstController.swift; sourceTree = "<group>"; };
+		70AF548C290FC243002975EF /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		70AF5491290FC245002975EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70AF5494290FC245002975EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70AF5496290FC245002975EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,11 +44,10 @@
 		70AF54A9290FCCEE002975EF /* startApp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = startApp.mp3; sourceTree = "<group>"; };
 		70AF54B0290FCD3A002975EF /* SoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundModel.swift; sourceTree = "<group>"; };
 		70AF54B2290FCF26002975EF /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
-		EC3B2129291043DA0080E158 /* SeconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeconViewController.swift; sourceTree = "<group>"; };
-		EC3B212B2910442D0080E158 /* TwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoViewController.swift; sourceTree = "<group>"; };
-		EC3B212D2910443B0080E158 /* ThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeViewController.swift; sourceTree = "<group>"; };
-		EC3B212F2910444B0080E158 /* FourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FourViewController.swift; sourceTree = "<group>"; };
-		EC3B21312910445B0080E158 /* FifeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FifeViewController.swift; sourceTree = "<group>"; };
+		EC3B2129291043DA0080E158 /* RuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleViewController.swift; sourceTree = "<group>"; };
+		EC3B212B2910442D0080E158 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		EC3B212D2910443B0080E158 /* InterimResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterimResultViewController.swift; sourceTree = "<group>"; };
+		EC3B212F2910444B0080E158 /* FinalResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalResultViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,12 +110,11 @@
 		70AF54A0290FC4B9002975EF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				70AF548C290FC243002975EF /* FirstController.swift */,
-				EC3B2129291043DA0080E158 /* SeconViewController.swift */,
-				EC3B212B2910442D0080E158 /* TwoViewController.swift */,
-				EC3B212D2910443B0080E158 /* ThreeViewController.swift */,
-				EC3B212F2910444B0080E158 /* FourViewController.swift */,
-				EC3B21312910445B0080E158 /* FifeViewController.swift */,
+				70AF548C290FC243002975EF /* StartViewController.swift */,
+				EC3B2129291043DA0080E158 /* RuleViewController.swift */,
+				EC3B212B2910442D0080E158 /* GameViewController.swift */,
+				EC3B212D2910443B0080E158 /* InterimResultViewController.swift */,
+				EC3B212F2910444B0080E158 /* FinalResultViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -231,16 +228,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC3B21322910445B0080E158 /* FifeViewController.swift in Sources */,
-				70AF548D290FC243002975EF /* FirstController.swift in Sources */,
+				70AF548D290FC243002975EF /* StartViewController.swift in Sources */,
 				70AF54B1290FCD3A002975EF /* SoundModel.swift in Sources */,
 				70AF5489290FC243002975EF /* AppDelegate.swift in Sources */,
-				EC3B212E2910443B0080E158 /* ThreeViewController.swift in Sources */,
-				EC3B212A291043DA0080E158 /* SeconViewController.swift in Sources */,
-				EC3B212C2910442D0080E158 /* TwoViewController.swift in Sources */,
+				EC3B212E2910443B0080E158 /* InterimResultViewController.swift in Sources */,
+				EC3B212A291043DA0080E158 /* RuleViewController.swift in Sources */,
+				EC3B212C2910442D0080E158 /* GameViewController.swift in Sources */,
 				70AF548B290FC243002975EF /* SceneDelegate.swift in Sources */,
 				70AF54B3290FCF26002975EF /* QuestionModel.swift in Sources */,
-				EC3B21302910444B0080E158 /* FourViewController.swift in Sources */,
+				EC3B21302910444B0080E158 /* FinalResultViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
