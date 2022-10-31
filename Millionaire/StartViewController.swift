@@ -43,7 +43,12 @@ class StartViewController: UIViewController {
         setupStartButton()
         setupRuleButton()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        playSound(resource: "startApp")
+    }
+    
     //MARK: - Setups
     
     override public var shouldAutorotate: Bool {
@@ -81,12 +86,14 @@ class StartViewController: UIViewController {
     //MARK: - Actions
     
     @objc private func startButtonAction() {
-           
+        
         print(#function)
         
-//        let gameViewController = GameViewController()
-//           self.navigationController?.pushViewController(gameViewController, animated: true)
-       }
+        //        let gameViewController = GameViewController()
+        //           self.navigationController?.pushViewController(gameViewController, animated: true)
+        
+        playSound(resource: "waitForResponse")
+    }
     
     @objc private func ruleButtonAction() {
            
