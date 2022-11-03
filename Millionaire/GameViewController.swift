@@ -9,42 +9,21 @@ import UIKit
 
 class GameViewController: UIViewController {
 
-//    var buttonStackView = UIStackView()
-//    var helpButtonStackView = UIStackView()
     var aButton = CustomButton()
     var bButton = CustomButton()
     var cButton = CustomButton()
     var dButton = CustomButton()
     var questions = Question.questions
+    var myTimer = Timer()
 
     //MARK: - UIElements
 
-    //    private let backgroundImageView: UIImageView = {
-    //        let image = UIImage(named: "")
-    //        let imageView = UIImageView(image: image)
-    //        imageView.translatesAutoresizingMaskIntoConstraints = false
-    //        return imageView
-    //    }()
-    //
-    //    private let scrollView: UIScrollView = {
-    //        let scrollView = UIScrollView()
-    //        scrollView.translatesAutoresizingMaskIntoConstraints = false
-    //        return scrollView
-    //    }()
-
-    //    private let backgroundView: UIView = {
-    //        let view = UIView()
-    //        view.backgroundColor = .clear
-    //        view.translatesAutoresizingMaskIntoConstraints = false
-    //        return view
-    //    }()
-
-    private lazy var imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let image = UIImage(named: "background")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
-    } ()
+    }()
 
     func helpButton(text: String, action: Selector) -> UIButton {
         let button = UIButton()
@@ -57,13 +36,22 @@ class GameViewController: UIViewController {
         return button
     }
 
-    private lazy var fiftyButton = helpButton(text: "fff", action: #selector(fiftyButtonAction))
-    private lazy var callButton = helpButton(text: "fff", action: #selector(callButtonAction))
-    private lazy var hallHelpButton = helpButton(text: "fff", action: #selector(hallHelpButtonAction))
+    private lazy var fiftyButton = helpButton(text: "50/50", action: #selector(fiftyButtonAction))
+    private lazy var callButton = helpButton(text: "звонок", action: #selector(callButtonAction))
+    private lazy var hallHelpButton = helpButton(text: "зал", action: #selector(hallHelpButtonAction))
+
+    private let timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "30"
+        label.font = .systemFont(ofSize: 45)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    } ()
 
     private lazy var questionsLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .white
         label.text = questions[0].text
         label.numberOfLines = 4
         label.font = label.font.withSize(22)
@@ -72,24 +60,6 @@ class GameViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    //    func makeButton(text: String, action: Selector) -> UIButton {
-    //        let button = UIButton()
-    //        button.layer.cornerRadius = 10
-    //        button.backgroundColor = .yellow
-    //        button.setTitle(text, for: .normal)
-    //        button.setTitleColor(.black, for: .normal)
-    //        button.addTarget(self, action: action, for: .touchUpInside)
-    //        button.translatesAutoresizingMaskIntoConstraints = false
-    //        return button
-    //}
-
-    //    private lazy var aButton = makeButton(text: "fff", action: #selector(aButtonAction))
-    //    private lazy var bButton = makeButton(text: "fff", action: #selector(aButtonAction))
-    //    private lazy var cButton = makeButton(text: "fff", action: #selector(aButtonAction))
-    //    private lazy var dButton = makeButton(text: "fff", action: #selector(aButtonAction))
-
-
 
     // MARK: - LifeCycle
 
@@ -109,7 +79,7 @@ class GameViewController: UIViewController {
         hallHelpButton.layer.cornerRadius = fiftyButton.frame.width / 2
     }
 
-    func answerButton() {
+    private func answerButton() {
         aButtonTapped()
         bButtonTapped()
         cButtonTapped()
@@ -144,19 +114,26 @@ class GameViewController: UIViewController {
         view.addSubview(fiftyButton)
         view.addSubview(hallHelpButton)
         view.addSubview(callButton)
+        view.addSubview(timeLabel)
         view.addSubview(aButton)
         view.addSubview(bButton)
         view.addSubview(cButton)
         view.addSubview(dButton)
-
-//        buttonStackView = UIStackView(arrangedSubviews: [aButton, bButton, cButton, dButton],
-//                                      axis: .vertical,
-//                                      spacing: 25,
-//                                      distribution: .fillProportionally)
-//        view.addSubview(buttonStackView)
     }
 
+    func startTimer() {
+        myTimer = Timer.scheduledTimer(timeInterval: 1,
+                                    target: self,
+                                    selector: (#selector(updateTimer)),
+                                    userInfo: nil,
+                                    repeats: true)
+    }
+
+
     //MARK: - Button Action
+
+    @objc func updateTimer() {
+    }
 
     @objc func fiftyButtonAction() {
         print("Pressed")
@@ -192,23 +169,28 @@ class GameViewController: UIViewController {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
-            fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -110),
+            fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
             fiftyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
             fiftyButton.widthAnchor.constraint(equalToConstant: 60),
             fiftyButton.heightAnchor.constraint(equalToConstant: 60),
 
-            hallHelpButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -110),
+            hallHelpButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
             hallHelpButton.leadingAnchor.constraint(equalTo: fiftyButton.trailingAnchor, constant: 40),
             hallHelpButton.widthAnchor.constraint(equalToConstant: 60),
             hallHelpButton.heightAnchor.constraint(equalToConstant: 60),
 
-            callButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -110),
+            callButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
             callButton.leadingAnchor.constraint(equalTo: hallHelpButton.trailingAnchor, constant: 40),
             callButton.widthAnchor.constraint(equalToConstant: 60),
             callButton.heightAnchor.constraint(equalToConstant: 60),
 
+            timeLabel.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: 10),
+            timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timeLabel.widthAnchor.constraint(equalToConstant: 70),
+            timeLabel.heightAnchor.constraint(equalToConstant: 70),
+
             questionsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            questionsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -80),
+            questionsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
             questionsLabel.widthAnchor.constraint(equalToConstant: 330),
             questionsLabel.heightAnchor.constraint(equalToConstant: 170),
 
@@ -231,17 +213,6 @@ class GameViewController: UIViewController {
             dButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             dButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             dButton.heightAnchor.constraint(equalToConstant: 50),
-
-//            newButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//            newButton.widthAnchor.constraint(equalToConstant: 280).isActive = true
-//            newButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -70).isActive = true
-
-
-//            buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            buttonStackView.topAnchor.constraint(equalTo: questionsLabel.bottomAnchor, constant: 50),
-//            buttonStackView.widthAnchor.constraint(equalToConstant: 350),
-//            buttonStackView.heightAnchor.constraint(equalToConstant: 210)
         ])
     }
 }
