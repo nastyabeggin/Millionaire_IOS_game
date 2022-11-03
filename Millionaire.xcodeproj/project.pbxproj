@@ -28,6 +28,7 @@
 		EC3B212C2910442D0080E158 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212B2910442D0080E158 /* GameViewController.swift */; };
 		EC3B212E2910443B0080E158 /* LevelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212D2910443B0080E158 /* LevelListViewController.swift */; };
 		EC3B21302910444B0080E158 /* FinalResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC3B212F2910444B0080E158 /* FinalResultViewController.swift */; };
+		ECDE7DF0291418410019F36B /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDE7DEF291418410019F36B /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		EC3B212B2910442D0080E158 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		EC3B212D2910443B0080E158 /* LevelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListViewController.swift; sourceTree = "<group>"; };
 		EC3B212F2910444B0080E158 /* FinalResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalResultViewController.swift; sourceTree = "<group>"; };
+		ECDE7DEF291418410019F36B /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			children = (
 				70AF54A2290FC4FC002975EF /* App */,
 				70AF54A0290FC4B9002975EF /* Controller */,
+				ECDE7DEE291418180019F36B /* Extensoins */,
 				70AF549F290FC49E002975EF /* Model */,
 				70AF549E290FC486002975EF /* View */,
 				70AF54A1290FC4D5002975EF /* Resources */,
@@ -168,6 +171,14 @@
 			name = LevelList;
 			sourceTree = "<group>";
 		};
+		ECDE7DEE291418180019F36B /* Extensoins */ = {
+			isa = PBXGroup;
+			children = (
+				ECDE7DEF291418410019F36B /* CustomButton.swift */,
+			);
+			name = Extensoins;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -245,6 +256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECDE7DF0291418410019F36B /* CustomButton.swift in Sources */,
 				70AF548D290FC243002975EF /* StartViewController.swift in Sources */,
 				70AF54B1290FCD3A002975EF /* SoundModel.swift in Sources */,
 				A56C128829111E3A00AD47DE /* LevelListTableViewCell.swift in Sources */,
