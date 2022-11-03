@@ -14,7 +14,7 @@ class LevelListTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "?"
-        view.font = .systemFont(ofSize: 17)
+        view.font = .systemFont(ofSize: 15)
         view.textAlignment = .center
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -22,7 +22,7 @@ class LevelListTableViewCell: UITableViewCell {
     
     var question: Question! {
         didSet {
-            titleLabel.text = question.text
+            titleLabel.text = question.number
             titleLabel.backgroundColor = question.isAnswered ? .systemGreen : .white
         }
     }

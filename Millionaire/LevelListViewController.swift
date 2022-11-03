@@ -2,9 +2,7 @@ import UIKit
 
 class LevelListViewController: UIViewController {
     
-    var easyQuestions = Question.easyQuestions
-    var mediumQuestions = Question.mediumQuestions
-    var hardQuestions = Question.hardQuestions
+    var questions = Question.questions
     
     override func loadView() {
         let view = LevelListView()
@@ -26,17 +24,14 @@ private extension LevelListViewController {
 
 extension LevelListViewController: LevelListViewDelegate {
     func cellTapped(_ indexPath: IndexPath) {
-        let data = easyQuestions + mediumQuestions + hardQuestions
-        print(data.reversed()[indexPath.row])
+        print(questions.reversed()[indexPath.row])
     }
     
     func getNumberOfQuestions() -> Int {
-        let data = easyQuestions + mediumQuestions + hardQuestions
-        return data.count
+        return questions.count
     }
     
     func getQuestion(_ indexPath: IndexPath) -> Question {
-        let data = easyQuestions + mediumQuestions + hardQuestions
-        return data.reversed()[indexPath.row]
+        return questions.reversed()[indexPath.row]
     }
 }

@@ -42,11 +42,11 @@ class StartViewController: UIViewController {
         setupView()
         setupStartButton()
         setupRuleButton()
+        playSound(resource: "startApp")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        playSound(resource: "startApp")
     }
     
     //MARK: - Setups
@@ -86,21 +86,17 @@ class StartViewController: UIViewController {
     //MARK: - Actions
     
     @objc private func startButtonAction() {
-        
-        print(#function)
-        
-        //        let gameViewController = GameViewController()
-        //           self.navigationController?.pushViewController(gameViewController, animated: true)
+        let viewController = GameViewController()
+          if let navigator = navigationController {
+            navigator.pushViewController(viewController, animated: true)
+          }
         
         playSound(resource: "waitForResponse")
     }
     
     @objc private func ruleButtonAction() {
-           
-        print(#function)
-        
-//        let ruleViewController = RuleViewController()
-//           self.navigationController?.pushViewController(ruleViewController, animated: true)
+        let ruleViewController = RuleViewController()
+        self.navigationController?.pushViewController(ruleViewController, animated: true)
        }
 
 }

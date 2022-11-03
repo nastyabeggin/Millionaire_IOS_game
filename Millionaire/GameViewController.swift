@@ -15,6 +15,7 @@ class GameViewController: UIViewController {
     var bButton = CustomButton()
     var cButton = CustomButton()
     var dButton = CustomButton()
+    var questions = Question.questions
 
     //MARK: - UIElements
 
@@ -60,10 +61,10 @@ class GameViewController: UIViewController {
     private lazy var callButton = helpButton(text: "fff", action: #selector(callButtonAction))
     private lazy var hallHelpButton = helpButton(text: "fff", action: #selector(hallHelpButtonAction))
 
-    private let questionsLabel: UILabel = {
+    private lazy var questionsLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
-        label.text = "textaaaaaaaanljknkljblkjsnlkjn;gsljkngl;skng'lskgnpuihipuyp98y898uyoiuhpoiuhdgpoidhgpihd[gijdpohijdphipdhijpdhij'"
+        label.text = questions[0].text
         label.numberOfLines = 4
         label.font = label.font.withSize(22)
         label.textColor = .black

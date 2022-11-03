@@ -100,7 +100,6 @@ class RuleViewController: UIViewController{
     //MARK: - Actions
     @objc private func backToMainScreenButtonAction() {
         let startViewController = StartViewController()
-        
         self.navigationController?.pushViewController(startViewController, animated: true) // idk how to make it work? do we need to built navigationController?
    }
     
