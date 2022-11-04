@@ -12,11 +12,12 @@ class GameViewController: UIViewController {
     //MARK: - Properties
     
     var gameBrain: GameBrain?
-    var aButton = CustomButton()
-    var bButton = CustomButton()
-    var cButton = CustomButton()
-    var dButton = CustomButton()
+    private let aButton = CustomButton()
+    private let bButton = CustomButton()
+    private let cButton = CustomButton()
+    private let dButton = CustomButton()
     var myTimer = Timer()
+    var durationTimer = 30
 
     //MARK: - UIElements
 
@@ -27,7 +28,7 @@ class GameViewController: UIViewController {
         return imageView
     }()
 
-    func helpButton(text: String, action: Selector) -> UIButton {
+    private func helpButton(text: String, action: Selector) -> UIButton {
         let button = UIButton()
         button.backgroundColor = .yellow
         button.setTitle(text, for: .normal)
@@ -50,7 +51,7 @@ class GameViewController: UIViewController {
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    } ()
+    }()
 
     private lazy var questionsLabel: UILabel = {
         let label = UILabel()
@@ -67,10 +68,11 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        startTimer()
         setupHierarchy()
         setupLayout()
         answerButton()
+        setNavigationBar()
     }
 
     override func viewDidLayoutSubviews() {
@@ -93,17 +95,17 @@ class GameViewController: UIViewController {
         aButton.addTarget(self, action: #selector(aButtonAction), for: .touchUpInside)
     }
 
-    func bButtonTapped() {
+    private func bButtonTapped() {
         bButton.setTitle(gameBrain?.currentAnswerB, for: .normal)
         bButton.addTarget(self, action: #selector(bButtonAction), for: .touchUpInside)
     }
 
-    func cButtonTapped() {
+    private func cButtonTapped() {
         cButton.setTitle(gameBrain?.currentAnswerC, for: .normal)
         cButton.addTarget(self, action: #selector(cButtonAction), for: .touchUpInside)
     }
 
-    func dButtonTapped() {
+    private func dButtonTapped() {
         dButton.setTitle(gameBrain?.currentAnswerD, for: .normal)
         dButton.addTarget(self, action: #selector(dButtonAction), for: .touchUpInside)
     }
@@ -123,7 +125,7 @@ class GameViewController: UIViewController {
         view.addSubview(dButton)
     }
 
-    func startTimer() {
+    private func startTimer() {
         myTimer = Timer.scheduledTimer(timeInterval: 1,
                                     target: self,
                                     selector: (#selector(updateTimer)),
@@ -131,9 +133,29 @@ class GameViewController: UIViewController {
                                     repeats: true)
     }
 
+    private func setNavigationBar() { // кастомная кнопка для навигейшенбара
+        navigationController?.navigationBar.tintColor = .black
+        let userInfoButton = createCustomButton(selector: #selector(tachMoneyButton))
+        navigationItem.rightBarButtonItem = userInfoButton
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "xmark.circle"),
+            style: .done,
+            target: self,
+            action: #selector(gameOver))
+    }
+
     //MARK: - Button Action
 
     @objc func updateTimer() {
+        durationTimer -= 1
+        timeLabel.text = "\(durationTimer)"
+
+        if durationTimer == 0 {
+            myTimer.invalidate()
+            timeLabel.text = ""
+            showAlert()
+        }
     }
 
     @objc func fiftyButtonAction() {
@@ -166,6 +188,31 @@ class GameViewController: UIViewController {
     @objc func dButtonAction() {
         dButton.shake()
         print("Pressed")
+    }
+
+    @objc func tachMoneyButton() {
+
+    }
+
+    @objc func gameOver() {
+        if let navigator = navigationController {
+            navigator.popViewController(animated: true)
+        }
+        player.stop()
+    }
+
+    func showAlert() {
+        let alert = UIAlertController(
+            title: "Game over!",
+            message: "",
+            preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "OK!", style: .cancel, handler: { event in
+            if let navigator = self.navigationController {
+                navigator.popViewController(animated: true)
+            }
+        }))
+        self.present(alert, animated: true)
     }
 
     private func setupLayout() {
