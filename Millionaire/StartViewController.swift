@@ -9,7 +9,26 @@ import UIKit
 
 class StartViewController: UIViewController {
 
+    //MARK: - Properties
+    
+    var gameBrain = GameBrain()
+    
     //MARK: - UIElements
+    
+    private let backgroundView: UIImageView = {
+        let image = UIImage(named: "background")
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let logoView: UIImageView = {
+        let image = UIImage(named: "logo")
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     
     private lazy var startButton: UIButton = {
             let button = UIButton()
@@ -39,7 +58,8 @@ class StartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        
+        setupHierarchy()
         setupStartButton()
         setupRuleButton()
         playSound(resource: "startApp")
@@ -51,16 +71,10 @@ class StartViewController: UIViewController {
     
     //MARK: - Setups
     
-    override public var shouldAutorotate: Bool {
-      return false
-    }
-    
-    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-      return .portrait
-    }
-    
-    override public var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-      return .portrait
+    private func setupHierarchy() {
+        view.addSubview(backgroundView)
+        view.addSubview(startButton)
+        view.addSubview(ruleButton)
     }
     
     private func setupView() {
@@ -68,7 +82,6 @@ class StartViewController: UIViewController {
     }
 
     private func setupStartButton() {
-        self.view.addSubview(self.startButton)
         self.startButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -180).isActive = true
             self.startButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
             self.startButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50).isActive = true
@@ -76,7 +89,6 @@ class StartViewController: UIViewController {
         }
     
     private func setupRuleButton() {
-            self.view.addSubview(self.ruleButton)
             self.ruleButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80).isActive = true
             self.ruleButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
             self.ruleButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50).isActive = true
@@ -90,7 +102,8 @@ class StartViewController: UIViewController {
           if let navigator = navigationController {
             navigator.pushViewController(viewController, animated: true)
           }
-        
+        viewController.gameBrain = gameBrain
+        gameBrain.getQuestion()
         playSound(resource: "waitForResponse")
     }
     

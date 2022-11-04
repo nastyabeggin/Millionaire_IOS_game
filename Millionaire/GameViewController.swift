@@ -9,16 +9,18 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    //MARK: - Properties
+    
+    var gameBrain: GameBrain?
     var aButton = CustomButton()
     var bButton = CustomButton()
     var cButton = CustomButton()
     var dButton = CustomButton()
-    var questions = Question.questions
     var myTimer = Timer()
 
     //MARK: - UIElements
 
-    private let imageView: UIImageView = {
+    private let backgroundView: UIImageView = {
         let image = UIImage(named: "background")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -52,9 +54,9 @@ class GameViewController: UIViewController {
 
     private lazy var questionsLabel: UILabel = {
         let label = UILabel()
-        label.text = questions[0].text
+        label.text = gameBrain?.currentQuestion
         label.numberOfLines = 4
-        label.font = label.font.withSize(22)
+        label.font = label.font.withSize(30)
         label.textColor = .black
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -87,29 +89,29 @@ class GameViewController: UIViewController {
     }
 
     private func aButtonTapped() {
-        aButton.setTitle("new button", for: .normal)
+        aButton.setTitle(gameBrain?.currentAnswerA, for: .normal)
         aButton.addTarget(self, action: #selector(aButtonAction), for: .touchUpInside)
     }
 
     func bButtonTapped() {
-        bButton.setTitle("new button", for: .normal)
+        bButton.setTitle(gameBrain?.currentAnswerB, for: .normal)
         bButton.addTarget(self, action: #selector(bButtonAction), for: .touchUpInside)
     }
 
     func cButtonTapped() {
-        cButton.setTitle("new button", for: .normal)
+        cButton.setTitle(gameBrain?.currentAnswerC, for: .normal)
         cButton.addTarget(self, action: #selector(cButtonAction), for: .touchUpInside)
     }
 
     func dButtonTapped() {
-        dButton.setTitle("new button", for: .normal)
+        dButton.setTitle(gameBrain?.currentAnswerD, for: .normal)
         dButton.addTarget(self, action: #selector(dButtonAction), for: .touchUpInside)
     }
 
     //MARK: - Setups
 
     private func setupHierarchy() {
-        view.addSubview(imageView)
+        view.addSubview(backgroundView)
         view.addSubview(questionsLabel)
         view.addSubview(fiftyButton)
         view.addSubview(hallHelpButton)
@@ -128,7 +130,6 @@ class GameViewController: UIViewController {
                                     userInfo: nil,
                                     repeats: true)
     }
-
 
     //MARK: - Button Action
 

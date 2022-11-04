@@ -21,6 +21,7 @@
 		70AF54AF290FCCEE002975EF /* startApp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70AF54A9290FCCEE002975EF /* startApp.mp3 */; };
 		70AF54B1290FCD3A002975EF /* SoundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF54B0290FCD3A002975EF /* SoundModel.swift */; };
 		70AF54B3290FCF26002975EF /* QuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AF54B2290FCF26002975EF /* QuestionModel.swift */; };
+		70DF1B9A29153B25003C13F5 /* GameBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70DF1B9929153B25003C13F5 /* GameBrain.swift */; };
 		A56C12802911137A00AD47DE /* LevelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C127F2911137A00AD47DE /* LevelListView.swift */; };
 		A56C1282291113A200AD47DE /* LevelListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C1281291113A200AD47DE /* LevelListTableView.swift */; };
 		A56C128829111E3A00AD47DE /* LevelListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56C128729111E3A00AD47DE /* LevelListTableViewCell.swift */; };
@@ -48,6 +49,7 @@
 		70AF54A9290FCCEE002975EF /* startApp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = startApp.mp3; sourceTree = "<group>"; };
 		70AF54B0290FCD3A002975EF /* SoundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundModel.swift; sourceTree = "<group>"; };
 		70AF54B2290FCF26002975EF /* QuestionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionModel.swift; sourceTree = "<group>"; };
+		70DF1B9929153B25003C13F5 /* GameBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBrain.swift; sourceTree = "<group>"; };
 		A56C127F2911137A00AD47DE /* LevelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListView.swift; sourceTree = "<group>"; };
 		A56C1281291113A200AD47DE /* LevelListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListTableView.swift; sourceTree = "<group>"; };
 		A56C128729111E3A00AD47DE /* LevelListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelListTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				70AF54B0290FCD3A002975EF /* SoundModel.swift */,
 				70AF54B2290FCF26002975EF /* QuestionModel.swift */,
+				70DF1B9929153B25003C13F5 /* GameBrain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				ECDE7DF0291418410019F36B /* CustomButton.swift in Sources */,
 				70AF548D290FC243002975EF /* StartViewController.swift in Sources */,
+				70DF1B9A29153B25003C13F5 /* GameBrain.swift in Sources */,
 				70AF54B1290FCD3A002975EF /* SoundModel.swift in Sources */,
 				A56C128829111E3A00AD47DE /* LevelListTableViewCell.swift in Sources */,
 				70AF5489290FC243002975EF /* AppDelegate.swift in Sources */,

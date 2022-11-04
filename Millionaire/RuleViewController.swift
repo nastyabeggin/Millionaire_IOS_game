@@ -10,6 +10,14 @@ import UIKit
 class RuleViewController: UIViewController{
     
     //MARK: - UIElements
+    
+    private let backgroundView: UIImageView = {
+        let image = UIImage(named: "background")
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private lazy var rulesHeading: UILabel = {
         let heading = UILabel()
         heading.text = "Правила"
@@ -44,45 +52,34 @@ class RuleViewController: UIViewController{
         return button
     }()
     
+    // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
+        self.navigationItem.hidesBackButton = true
+        
+        setupHierarchy()
         setupRulesHeading()
         setupRulesContent()
         setupBackToMainScreenButton()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    
     //MARK: - Setups
-    override public var shouldAutorotate: Bool {
-      return false
-    }
-    
-    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-      return .portrait
-    }
-    
-    override public var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-      return .portrait
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .blue
+ 
+    private func setupHierarchy() {
+        view.addSubview(backgroundView)
+        view.addSubview(rulesHeading)
+        view.addSubview(rulesContent)
+        view.addSubview(backToMainScreenButton)
     }
     
     private func setupRulesHeading(){
-        self.view.addSubview(self.rulesHeading)
         self.rulesHeading.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         self.rulesHeading.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         self.rulesHeading.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     private func setupRulesContent(){
-        self.view.addSubview(self.rulesContent)
         self.rulesContent.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
         self.rulesContent.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         self.rulesContent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
@@ -90,7 +87,6 @@ class RuleViewController: UIViewController{
     }
     
     private func setupBackToMainScreenButton() {
-        self.view.addSubview(self.backToMainScreenButton)
         self.backToMainScreenButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80).isActive = true
         self.backToMainScreenButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
         self.backToMainScreenButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50).isActive = true
@@ -98,9 +94,8 @@ class RuleViewController: UIViewController{
     }
     
     //MARK: - Actions
-    @objc private func backToMainScreenButtonAction() {
-        let startViewController = StartViewController()
-        self.navigationController?.pushViewController(startViewController, animated: true) // idk how to make it work? do we need to built navigationController?
-   }
     
+    @objc private func backToMainScreenButtonAction() {
+        self.navigationController?.popViewController(animated: true)
+   }
 }
