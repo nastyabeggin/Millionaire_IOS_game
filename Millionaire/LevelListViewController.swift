@@ -1,7 +1,12 @@
 import UIKit
 
+protocol LevelListViewControllerDelegate: AnyObject {
+    func nextLevel()
+}
+
 class LevelListViewController: UIViewController {
     
+    var delegate: LevelListViewControllerDelegate!
     var questions = Question.questions
     
     override func loadView() {
@@ -23,8 +28,8 @@ private extension LevelListViewController {
 }
 
 extension LevelListViewController: LevelListViewDelegate {
-    func cellTapped(_ indexPath: IndexPath) {
-        print(questions.reversed()[indexPath.row])
+    func nextLevelButtonTapped() {
+        delegate.nextLevel()
     }
     
     func getNumberOfQuestions() -> Int {

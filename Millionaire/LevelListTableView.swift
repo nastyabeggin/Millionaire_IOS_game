@@ -1,9 +1,5 @@
 import UIKit
 
-protocol LevelListTableViewActionDelegate: AnyObject {
-    func didSelectRowAt(_ indexPath: IndexPath)
-}
-
 protocol LevelListTableViewDataSourceDelegate: AnyObject {
     func numberOfRowsInSection() -> Int
     func cellForRowAt(_ indexPath: IndexPath) -> Question
@@ -12,7 +8,6 @@ protocol LevelListTableViewDataSourceDelegate: AnyObject {
 
 class LevelListTableView: UITableView {
     
-    weak var actionDelegate: LevelListTableViewActionDelegate!
     weak var dataSourceDelegate: LevelListTableViewDataSourceDelegate!
     
     override init(frame: CGRect, style: UITableView.Style) {
@@ -28,8 +23,8 @@ class LevelListTableView: UITableView {
 
 private extension LevelListTableView {
     func setup() {
-        delegate = self
         dataSource = self
+        delegate = self
         register(LevelListTableViewCell.self, forCellReuseIdentifier: LevelListTableViewCell.reuseIdentifier)
         backgroundColor = .clear
         allowsSelection = false
@@ -38,13 +33,7 @@ private extension LevelListTableView {
     }
 }
 
-extension LevelListTableView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        actionDelegate.didSelectRowAt(indexPath)
-    }
-}
-
-extension LevelListTableView: UITableViewDataSource {
+extension LevelListTableView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataSourceDelegate.numberOfRowsInSection()
     }

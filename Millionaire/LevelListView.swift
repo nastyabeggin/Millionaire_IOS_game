@@ -1,8 +1,7 @@
 import UIKit
 
 protocol LevelListViewDelegate: AnyObject {
-    func cellTapped(_ indexPath: IndexPath)
-    
+    func nextLevelButtonTapped()
     func getNumberOfQuestions() -> Int
     func getQuestion(_ indexPath: IndexPath) -> Question
 }
@@ -11,9 +10,15 @@ class LevelListView: UIView {
     
     weak var delegate: LevelListViewDelegate!
     
+    private lazy var backgroundImageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleToFill
+        view.image = UIImage(named: "background")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     private lazy var tableView: LevelListTableView = {
         let tableView = LevelListTableView(frame: .zero, style: .plain)
-        tableView.actionDelegate = self
         tableView.dataSourceDelegate = self
         return tableView
     }()
@@ -39,13 +44,21 @@ class LevelListView: UIView {
     }
     
     @objc private func nextQuestionTapped(sender: UIButton!) {
-        print("Next question")
+        delegate.nextLevelButtonTapped()
     }
 }
 
 private extension LevelListView {
     func setup() {
         backgroundColor = .systemPurple
+        
+        addSubview(backgroundImageView)
+        NSLayoutConstraint.activate([
+            backgroundImageView.topAnchor.constraint(equalTo: topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
         
         addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -62,12 +75,6 @@ private extension LevelListView {
             nextLevelButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
             nextLevelButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
         ])
-    }
-}
-
-extension LevelListView: LevelListTableViewActionDelegate {
-    func didSelectRowAt(_ indexPath: IndexPath) {
-        delegate.cellTapped(indexPath)
     }
 }
 

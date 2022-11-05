@@ -37,7 +37,7 @@ class GameBrain {
         return check
     }
     
-    func wonAmount() -> String {
+ func wonAmount() -> String {
         switch numberOfQuestion {
         case 0...4:
             return "Вы ничего не выиграли 😕"
