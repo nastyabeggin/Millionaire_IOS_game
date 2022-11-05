@@ -28,9 +28,13 @@ class LevelListTableViewCell: UITableViewCell {
             titleLabel.text = question.number
             if let answer = question.isAnswered {
                 titleLabel.backgroundColor = answer ? .systemGreen : .systemRed
-            } else {
+            } else if question.number.contains("⭐️") || question.number.contains("🌟"){
+                titleLabel.backgroundColor = .blue
+                titleLabel.textColor = .white
+            }else {
                 titleLabel.backgroundColor = .systemGray6
             }
+            
         }
     }
     
