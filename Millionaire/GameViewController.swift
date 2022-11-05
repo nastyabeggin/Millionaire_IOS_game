@@ -244,8 +244,13 @@ class GameViewController: UIViewController {
     }
     
     @objc func goToLevelListViewController() {
-        let levelListViewController = LevelListViewController()
-        self.navigationController?.pushViewController(levelListViewController, animated: true)
+        if gameBrain!.numberOfQuestion < 15 {
+            let levelListViewController = LevelListViewController()
+            self.navigationController?.pushViewController(levelListViewController, animated: true)
+        } else {
+            let finalResultViewController = FinalResultViewController()
+            self.navigationController?.pushViewController(finalResultViewController, animated: true)
+        }
     }
 
     //MARK: - Button Action
@@ -313,7 +318,6 @@ class GameViewController: UIViewController {
     // MARK: - Help hall
 
     @objc func hallHelpButtonAction() {
-        print("Pressed")
         if helpHall {
             showInfoHelpHall()
             helpHall = false
@@ -323,7 +327,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    /// - Помощь зала
     func showInfoHelpHall() {
         let alert = UIAlertController(title: "Результат опроса зала",
                                       message: messageForAlertOfHelpHall(),
@@ -355,7 +358,6 @@ class GameViewController: UIViewController {
     // MARK: - Possible error
 
     @objc func possibleErrorButtonAction() {
-        print("Pressed")
         if possibleError {
             possibleError = false
             isRepeatedAnswerAllowed = true
@@ -368,13 +370,13 @@ class GameViewController: UIViewController {
     //MARK: - Handle buttons
     
     func handleButtons(){
-        if possibleError{
+        if possibleError {
             (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
-        } else if isRepeatedAnswerAllowed{
+        } else if isRepeatedAnswerAllowed {
             (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (true, true, true, true)
             isRepeatedAnswerAllowed = false
             answeredSecondTime = false
-        } else{
+        } else {
             (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
             answeredSecondTime = true
         }
@@ -402,7 +404,6 @@ class GameViewController: UIViewController {
         tagButton = bButton.tag
         currentTitleAnswerButton = bButton.currentTitle
         Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
-
     }
 
     @objc func cButtonAction() {
@@ -428,7 +429,7 @@ class GameViewController: UIViewController {
     }
 
     @objc func tachMoneyButton() {
-
+        goToLevelListViewController()
     }
 
     @objc func gameOver() {
