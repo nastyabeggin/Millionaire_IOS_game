@@ -32,6 +32,8 @@ class GameBrain {
     }
     
     func checkAnswer(_ userAnswer: String) -> Bool {
+        
+        
         let check = userAnswer == currentQuestion
         questions[numberOfQuestion].isAnswered = check
         return check
