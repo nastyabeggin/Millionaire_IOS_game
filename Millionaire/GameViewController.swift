@@ -189,7 +189,9 @@ class GameViewController: UIViewController {
                     startTimer()
                 }
                 playSound(resource: "wrongAnswer")
-                showAlertWrongAnswer()
+                if possibleError || (!possibleError && answeredSecondTime){
+                    showAlertWrongAnswer()
+                }
             }
         case 2:
             if check! {
@@ -202,7 +204,9 @@ class GameViewController: UIViewController {
                     startTimer()
                 }
                 playSound(resource: "wrongAnswer")
-                showAlertWrongAnswer()
+                if possibleError || (!possibleError && answeredSecondTime){
+                    showAlertWrongAnswer()
+                }
             }
         case 3:
             if check! {
@@ -215,7 +219,9 @@ class GameViewController: UIViewController {
                     startTimer()
                 }
                 playSound(resource: "wrongAnswer")
-                showAlertWrongAnswer()
+                if possibleError || (!possibleError && answeredSecondTime){
+                    showAlertWrongAnswer()
+                }
             }
         case 4:
             if check! {
@@ -228,7 +234,9 @@ class GameViewController: UIViewController {
                     startTimer()
                 }
                 playSound(resource: "wrongAnswer")
-                showAlertWrongAnswer()
+                if possibleError || (!possibleError && answeredSecondTime){
+                    showAlertWrongAnswer()
+                }
             }
         default:
             print("Error")
@@ -298,7 +306,7 @@ class GameViewController: UIViewController {
             }
             fiftyFifty = false
         } else {
-            showInfo()
+            showAlertHint()
         }
     }
 
