@@ -34,6 +34,7 @@ class LevelListTableViewCell: UITableViewCell {
             }else {
                 titleLabel.backgroundColor = .systemGray6
             }
+            
         }
     }
     
