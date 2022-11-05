@@ -42,7 +42,7 @@ class RuleViewController: UIViewController{
         let myAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22.5, weight: .regular),
                             NSAttributedString.Key.foregroundColor: UIColor.white,
                             ]
-        let myString = NSMutableAttributedString(string: "  Для того чтобы заработать миллион рублей необходимо ответить на 15 вопросов из различных областей знаний.\n\nКаждый вопрос имеет 4 варианта ответа, из которых один верный.\n\nСуществуют три несгораемых суммы:\n- 1 000 рублей \n- 32 000 рублей \n- 1 000 000 рублей\n\nТакже есть три подсказки: \n- 50/50: исчезнут 2 неверных ответа. \n- Помощь зала: зал поможет с ответом.\n-Право на ошибку: возможность ответить неверно на вопрос, и игра на этом не закончится.\n\nВы можете забрать сумму в любой момент, пока не ответили неверно. Удачной игры!", attributes: myAttribute )
+        let myString = NSMutableAttributedString(string: "Для того чтобы заработать миллион рублей необходимо ответить на 15 вопросов из различных областей знаний.\n\nКаждый вопрос имеет 4 варианта ответа, из которых один верный.\n\nСуществуют три несгораемых суммы:\n- 1 000 рублей \n- 32 000 рублей \n- 1 000 000 рублей\n\nТакже есть три подсказки: \n- 50/50: исчезнут 2 неверных ответа. \n- Помощь зала: зал поможет с ответом.\n-Право на ошибку: возможность ответить неверно на вопрос, и игра на этом не закончится.\n\nВы можете забрать сумму в любой момент, пока не ответили неверно. \n\nУдачной игры!", attributes: myAttribute )
         var anotherAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23, weight: .bold),
                                  NSAttributedString.Key.foregroundColor: UIColor.yellow,
                                  ]

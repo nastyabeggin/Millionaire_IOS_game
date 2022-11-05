@@ -24,6 +24,7 @@ class GameViewController: UIViewController {
     private let backgroundView: UIImageView = {
         let image = UIImage(named: "background")
         let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -203,11 +204,11 @@ class GameViewController: UIViewController {
 
     func showAlert() {
         let alert = UIAlertController(
-            title: "Game over!",
-            message: "",
+            title: "Время вышло!",
+            message: gameBrain?.wonAmount(),
             preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "OK!", style: .cancel, handler: { event in
+        alert.addAction(UIAlertAction(title: "В ГЛАВНОЕ МЕНЮ", style: .cancel, handler: { event in
             if let navigator = self.navigationController {
                 navigator.popViewController(animated: true)
             }
@@ -217,6 +218,11 @@ class GameViewController: UIViewController {
 
     private func setupLayout() {
         NSLayoutConstraint.activate([
+            backgroundView.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            backgroundView.widthAnchor.constraint(equalToConstant: 0),
+            backgroundView.heightAnchor.constraint(equalToConstant: 0),
+            
             fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
             fiftyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
             fiftyButton.widthAnchor.constraint(equalToConstant: 60),

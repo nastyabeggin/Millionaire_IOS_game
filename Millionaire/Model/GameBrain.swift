@@ -20,6 +20,7 @@ class GameBrain {
     var currentAnswerCA: String?
     
     //MARK: - Logic
+    
     func getQuestion() {
         currentQuestion = questions[numberOfQuestion].text
         currentAnswerA = questions[numberOfQuestion].answer[0]
@@ -34,5 +35,16 @@ class GameBrain {
         return userAnswer == currentAnswerCA
     }
     
-    
+    func wonAmount() -> String {
+        switch numberOfQuestion {
+        case 0...4:
+            return "Вы ничего не выиграли 😕"
+        case 4...9:
+            return "Ваш выигрыш 1 000 рублей!"
+        case 9...14:
+            return "Ваш выигрыш 32 000 рублей!"
+        default:
+            return ""
+        }
+    }
 }
