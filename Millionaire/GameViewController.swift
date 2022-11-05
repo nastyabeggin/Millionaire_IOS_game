@@ -20,8 +20,8 @@ class GameViewController: UIViewController {
     var durationGAmeTimer = 30
 
     var fiftyFifty: Bool = true
-    var callPrompt: Bool = true
     var helpHall: Bool = true
+    var possibleError: Bool = true
 
     //MARK: - UIElements
 
@@ -45,13 +45,14 @@ class GameViewController: UIViewController {
     }
 
     private lazy var fiftyButton = helpButton(text: "dices.png", action: #selector(fiftyButtonAction))
-    private lazy var callButton = helpButton(text: "mistake.png", action: #selector(callButtonAction))
+    private lazy var possibleErrorButton = helpButton(text: "mistake.png", action: #selector(possibleErrorButtonAction))
     private lazy var hallHelpButton = helpButton(text: "people.png", action: #selector(hallHelpButtonAction))
+
 
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.text = "30"
-        label.font = .systemFont(ofSize: 50)
+        label.font = .systemFont(ofSize: 60)
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -79,12 +80,17 @@ class GameViewController: UIViewController {
         answerButton()
         setNavigationBar()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateAnswerButtons()
+    }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
         fiftyButton.layer.cornerRadius = fiftyButton.frame.width / 2
-        callButton.layer.cornerRadius = fiftyButton.frame.width / 2
+        possibleErrorButton.layer.cornerRadius = fiftyButton.frame.width / 2
         hallHelpButton.layer.cornerRadius = fiftyButton.frame.width / 2
     }
 
@@ -122,7 +128,7 @@ class GameViewController: UIViewController {
         view.addSubview(questionsLabel)
         view.addSubview(fiftyButton)
         view.addSubview(hallHelpButton)
-        view.addSubview(callButton)
+        view.addSubview(possibleErrorButton)
         view.addSubview(timeLabel)
         view.addSubview(aButton)
         view.addSubview(bButton)
@@ -130,6 +136,14 @@ class GameViewController: UIViewController {
         view.addSubview(dButton)
     }
 
+    private func updateAnswerButtons() {
+        aButton.backgroundColor = .yellow
+        bButton.backgroundColor = .yellow
+        cButton.backgroundColor = .yellow
+        dButton.backgroundColor = .yellow
+        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (true, true, true, true)
+    }
+    
     private func startTimer() {
         gameTimer = Timer.scheduledTimer(timeInterval: 1,
                                     target: self,
@@ -189,14 +203,37 @@ class GameViewController: UIViewController {
 //        }
     }
 
-    // MARK: - Call Friend
+    // MARK: - Help hall
 
-    @objc func callButtonAction() {
+    @objc func hallHelpButtonAction() {
         print("Pressed")
-        if callPrompt {
+        if helpHall {
+            showInfoHelpHall()
+            helpHall = false
+            hallHelpButton.backgroundColor = .darkGray
+        } else {
+            showInfo()
+        }
+    }
+
+    /// - Помощь зала
+    func showInfoHelpHall() {
+        let alert = UIAlertController(title: "Результат опроса зала",
+                                      message: "A - 30% " + "B - 20% " + "C - 45% " + "D - 5%",
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: - Possible error
+
+    @objc func possibleErrorButtonAction() {
+        print("Pressed")
+        if possibleError {
             showInfoCallFriend()
-            callPrompt = false
-            callButton.tintColor = .darkGray
+            possibleError = false
+            possibleErrorButton.backgroundColor = .darkGray
         } else {
             showInfo()
         }
@@ -215,50 +252,40 @@ class GameViewController: UIViewController {
 //        // Показываем UIAlertController
 //        present(alert, animated: true, completion: nil)
     }
-
-    // MARK: - Help hall
-
-    @objc func hallHelpButtonAction() {
-        print("Pressed")
-        if helpHall {
-            showInfoHelpHall()
-            helpHall = false
-            hallHelpButton.tintColor = .darkGray
-        } else {
-            showInfo()
-        }
-    }
-
-    /// - Помощь зала
-    func showInfoHelpHall() {
-        let alert = UIAlertController(title: "Результат опроса зала",
-                                      message: "A - 30% " + "B - 20% " + "C - 45% " + "D - 5%",
-                                      preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alert.addAction(action)
-        present(alert, animated: true, completion: nil)
-    }
-
-    // MARK: -
+    
+    
+    //MARK: - Actions after answer
 
     @objc func aButtonAction() {
         aButton.shake()
-        print("Pressed")
+        aButton.backgroundColor = .white
+        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        gameTimer.invalidate()
+        playSound(resource: "waitForInspection")
     }
 
     @objc func bButtonAction() {
         bButton.shake()
-        print("Pressed")
+        bButton.backgroundColor = .white
+        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        gameTimer.invalidate()
+        playSound(resource: "waitForInspection")
     }
 
     @objc func cButtonAction() {
         cButton.shake()
-        print("Pressed")
+        cButton.backgroundColor = .white
+        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        gameTimer.invalidate()
+        playSound(resource: "waitForInspection")
     }
 
     @objc func dButtonAction() {
         dButton.shake()
-        print("Pressed")
+        dButton.backgroundColor = .white
+        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        gameTimer.invalidate()
+        playSound(resource: "waitForInspection")
     }
 
     @objc func tachMoneyButton() {
@@ -288,7 +315,7 @@ class GameViewController: UIViewController {
 
     func showInfo() {
         let alert = UIAlertController(title: "Упс...",
-                                      message: "Вы уже использовали эту подсказку ;(",
+                                      message: "Вы уже использовали эту подсказку 😕",
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
@@ -312,15 +339,15 @@ class GameViewController: UIViewController {
             hallHelpButton.widthAnchor.constraint(equalToConstant: 60),
             hallHelpButton.heightAnchor.constraint(equalToConstant: 60),
 
-            callButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
-            callButton.leadingAnchor.constraint(equalTo: hallHelpButton.trailingAnchor, constant: 40),
-            callButton.widthAnchor.constraint(equalToConstant: 60),
-            callButton.heightAnchor.constraint(equalToConstant: 60),
+            possibleErrorButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
+            possibleErrorButton.leadingAnchor.constraint(equalTo: hallHelpButton.trailingAnchor, constant: 40),
+            possibleErrorButton.widthAnchor.constraint(equalToConstant: 60),
+            possibleErrorButton.heightAnchor.constraint(equalToConstant: 60),
 
             timeLabel.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: 10),
             timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            timeLabel.widthAnchor.constraint(equalToConstant: 70),
-            timeLabel.heightAnchor.constraint(equalToConstant: 70),
+            timeLabel.widthAnchor.constraint(equalToConstant: 80),
+            timeLabel.heightAnchor.constraint(equalToConstant: 80),
 
             questionsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             questionsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
