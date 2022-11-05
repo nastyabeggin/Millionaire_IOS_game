@@ -26,8 +26,7 @@ class GameViewController: UIViewController {
     var helpHall: Bool = true
     var possibleError: Bool = true
     
-    var fiftyFiftyButtonTapped: Bool = false
-
+    
     //MARK: - UIElements
 
     private let backgroundView: UIImageView = {
@@ -244,7 +243,7 @@ class GameViewController: UIViewController {
     // MARK: - 50/50
 
     @objc func fiftyButtonAction() {
-        if !fiftyFiftyButtonTapped{
+        if fiftyFifty{
             fiftyButton.backgroundColor = .white
             let correctAnswer = gameBrain?.currentAnswerCA
             let wrongAnswers = [gameBrain?.currentAnswerA,                                     gameBrain?.currentAnswerB,
@@ -284,7 +283,9 @@ class GameViewController: UIViewController {
             default:
                 print("some error occured")
             }
-            fiftyFiftyButtonTapped = true
+            fiftyFifty = false
+        } else {
+            showInfo()
         }
     }
 
@@ -320,7 +321,6 @@ class GameViewController: UIViewController {
     @objc func possibleErrorButtonAction() {
         print("Pressed")
         if possibleError {
-            showInfoCallFriend()
             possibleError = false
             possibleErrorButton.backgroundColor = .white
         } else {
@@ -328,20 +328,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    /// - Звонок другу
-    func showInfoCallFriend() {
-        // Создаем контроллер
-//        let alert = UIAlertController(title: "Звоним Дмитрию Диброву",
-//                                      message: "Я думаю что это - \(qestionsArray[questionNumber].coorectAnswer)",
-//                                      preferredStyle: .alert)
-//        // Создаем кнопку для UIAlertController
-//        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//        // Добавляем кнопку на UIAlertController
-//        alert.addAction(action)
-//        // Показываем UIAlertController
-//        present(alert, animated: true, completion: nil)
-    }
-    
     
     //MARK: - Actions after answer
 
