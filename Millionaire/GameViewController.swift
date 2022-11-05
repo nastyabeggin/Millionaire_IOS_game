@@ -35,7 +35,8 @@ class GameViewController: UIViewController {
     private func helpButton(text: String, action: Selector) -> UIButton {
         let button = UIButton()
         button.backgroundColor = .yellow
-        button.setTitle(text, for: .normal)
+        button.setImage(UIImage(named: text), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 7, left: 7, bottom: 7, right: 7)
         button.setTitleColor(.black, for: .normal)
         button.clipsToBounds = true
         button.addTarget(self, action: action, for: .touchUpInside)
@@ -43,9 +44,9 @@ class GameViewController: UIViewController {
         return button
     }
 
-    private lazy var fiftyButton = helpButton(text: "50/50", action: #selector(fiftyButtonAction))
-    private lazy var callButton = helpButton(text: "звонок", action: #selector(callButtonAction))
-    private lazy var hallHelpButton = helpButton(text: "зал", action: #selector(hallHelpButtonAction))
+    private lazy var fiftyButton = helpButton(text: "dices.png", action: #selector(fiftyButtonAction))
+    private lazy var callButton = helpButton(text: "mistake.png", action: #selector(callButtonAction))
+    private lazy var hallHelpButton = helpButton(text: "people.png", action: #selector(hallHelpButtonAction))
 
     private let timeLabel: UILabel = {
         let label = UILabel()
