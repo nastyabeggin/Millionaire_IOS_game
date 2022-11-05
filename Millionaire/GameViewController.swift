@@ -255,7 +255,6 @@ class GameViewController: UIViewController {
     @objc func possibleErrorButtonAction() {
         print("Pressed")
         if possibleError {
-            showInfoCallFriend()
             possibleError = false
             possibleErrorButton.backgroundColor = .white
         } else {
