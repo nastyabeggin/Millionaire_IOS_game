@@ -26,8 +26,9 @@ class GameViewController: UIViewController {
     var helpHall: Bool = true
     var possibleError: Bool = true
     
-    var fiftyFiftyButtonTapped: Bool = false
-
+    var isRepeatedAnswerAllowed: Bool = false
+    var answeredSecondTime: Bool = false
+    
     //MARK: - UIElements
 
     private let backgroundView: UIImageView = {
@@ -183,6 +184,9 @@ class GameViewController: UIViewController {
                 playSound(resource: "correctAnswer")
             } else {
                 aButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
             }
         case 2:
@@ -192,6 +196,9 @@ class GameViewController: UIViewController {
                 
             } else {
                 bButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
             }
         case 3:
@@ -200,6 +207,9 @@ class GameViewController: UIViewController {
                 playSound(resource: "correctAnswer")
             } else {
                 cButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
             }
         case 4:
@@ -208,6 +218,9 @@ class GameViewController: UIViewController {
                 playSound(resource: "correctAnswer")
             } else {
                 dButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
             }
         default:
@@ -231,7 +244,7 @@ class GameViewController: UIViewController {
     // MARK: - 50/50
 
     @objc func fiftyButtonAction() {
-        if !fiftyFiftyButtonTapped{
+        if fiftyFifty{
             fiftyButton.backgroundColor = .white
             let correctAnswer = gameBrain?.currentAnswerCA
             let wrongAnswers = [gameBrain?.currentAnswerA,                                     gameBrain?.currentAnswerB,
@@ -271,7 +284,9 @@ class GameViewController: UIViewController {
             default:
                 print("some error occured")
             }
-            fiftyFiftyButtonTapped = true
+            fiftyFifty = false
+        } else {
+            showInfo()
         }
     }
 
@@ -303,35 +318,35 @@ class GameViewController: UIViewController {
     @objc func possibleErrorButtonAction() {
         print("Pressed")
         if possibleError {
-            showInfoCallFriend()
             possibleError = false
+            isRepeatedAnswerAllowed = true
             possibleErrorButton.backgroundColor = .white
         } else {
             showInfo()
         }
     }
-
-    /// - Звонок другу
-    func showInfoCallFriend() {
-        // Создаем контроллер
-//        let alert = UIAlertController(title: "Звоним Дмитрию Диброву",
-//                                      message: "Я думаю что это - \(qestionsArray[questionNumber].coorectAnswer)",
-//                                      preferredStyle: .alert)
-//        // Создаем кнопку для UIAlertController
-//        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//        // Добавляем кнопку на UIAlertController
-//        alert.addAction(action)
-//        // Показываем UIAlertController
-//        present(alert, animated: true, completion: nil)
-    }
     
+    //MARK: - Handle buttons
+    
+    func handleButtons(){
+        if possibleError{
+            (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        } else if isRepeatedAnswerAllowed{
+            (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (true, true, true, true)
+            isRepeatedAnswerAllowed = false
+            answeredSecondTime = false
+        } else{
+            (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+            answeredSecondTime = true
+        }
+    }
     
     //MARK: - Actions after answer
 
     @objc func aButtonAction() {
         aButton.shake()
         aButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = aButton.tag
@@ -342,7 +357,7 @@ class GameViewController: UIViewController {
     @objc func bButtonAction() {
         bButton.shake()
         bButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = bButton.tag
@@ -354,7 +369,7 @@ class GameViewController: UIViewController {
     @objc func cButtonAction() {
         cButton.shake()
         cButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = cButton.tag
@@ -365,7 +380,7 @@ class GameViewController: UIViewController {
     @objc func dButtonAction() {
         dButton.shake()
         dButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = dButton.tag
