@@ -28,31 +28,30 @@ class StartViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
-    
+
     private lazy var startButton: UIButton = {
-            let button = UIButton()
-            button.backgroundColor = .yellow
-            button.layer.cornerRadius = 15
-            button.setTitle("НАЧАТЬ ИГРУ", for: .normal)
-            button.setTitleColor(.darkGray, for: .normal)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
-            button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
+        let button = UIButton()
+        button.backgroundColor = .yellow
+        button.layer.cornerRadius = 15
+        button.setTitle("НАЧАТЬ ИГРУ", for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+        button.addTarget(self, action: #selector(startButtonAction), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private lazy var ruleButton: UIButton = {
-            let button = UIButton()
-            button.backgroundColor = .yellow
-            button.layer.cornerRadius = 15
-            button.setTitle("ПРАВИЛА ИГРЫ", for: .normal)
-            button.setTitleColor(.darkGray, for: .normal)
-            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
-            button.addTarget(self, action: #selector(ruleButtonAction), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-            return button
-        }()
+        let button = UIButton()
+        button.backgroundColor = .yellow
+        button.layer.cornerRadius = 15
+        button.setTitle("ПРАВИЛА ИГРЫ", for: .normal)
+        button.setTitleColor(.darkGray, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+        button.addTarget(self, action: #selector(ruleButtonAction), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // MARK: - LifeCycle
 
@@ -61,7 +60,6 @@ class StartViewController: UIViewController {
         
         setupHierarchy()
         setupStartButton()
-        setupRuleButton()
         playSound(resource: "startApp")
     }
     
@@ -75,41 +73,48 @@ class StartViewController: UIViewController {
         view.addSubview(backgroundView)
         view.addSubview(startButton)
         view.addSubview(ruleButton)
-    }
-    
-    private func setupView() {
-        view.backgroundColor = .blue
+        view.addSubview(logoView)
     }
 
     private func setupStartButton() {
-        self.startButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -180).isActive = true
-            self.startButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
-            self.startButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50).isActive = true
-            self.startButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        }
-    
-    private func setupRuleButton() {
-            self.ruleButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80).isActive = true
-            self.ruleButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
-            self.ruleButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50).isActive = true
-            self.ruleButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        }
+        NSLayoutConstraint.activate([
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+
+            startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -180),
+            startButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            startButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            startButton.heightAnchor.constraint(equalToConstant: 60),
+
+            ruleButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
+            ruleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            ruleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            ruleButton.heightAnchor.constraint(equalToConstant: 60),
+
+            logoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            logoView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -80),
+            logoView.widthAnchor.constraint(equalToConstant: 300),
+            logoView.heightAnchor.constraint(equalToConstant: 300)
+        ])
+    }
 
     //MARK: - Actions
-    
+
     @objc private func startButtonAction() {
         let viewController = GameViewController()
-          if let navigator = navigationController {
+        if let navigator = navigationController {
             navigator.pushViewController(viewController, animated: true)
-          }
+        }
         viewController.gameBrain = gameBrain
         gameBrain.getQuestion()
         playSound(resource: "waitForResponse")
     }
-    
+
     @objc private func ruleButtonAction() {
         let ruleViewController = RuleViewController()
         self.navigationController?.pushViewController(ruleViewController, animated: true)
-       }
+    }
 
 }

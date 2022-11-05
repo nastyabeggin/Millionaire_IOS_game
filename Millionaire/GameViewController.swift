@@ -19,6 +19,10 @@ class GameViewController: UIViewController {
     var myTimer = Timer()
     var durationTimer = 30
 
+    var fiftyFifty: Bool = true
+    var callPrompt: Bool = true
+    var helpHall: Bool = true
+
     //MARK: - UIElements
 
     private let backgroundView: UIImageView = {
@@ -158,17 +162,83 @@ class GameViewController: UIViewController {
         }
     }
 
+    // MARK: - 50/50
+
     @objc func fiftyButtonAction() {
         print("Pressed")
+//        if fiftyFifty {
+//            fiftyFifty = false
+//            fiftyButton.tintColor = .darkGray
+//            var count = 0
+//            let curentQuestion = qestionsArray[questionNumber]
+//            if answerB.titleLabel?.text != curentQuestion.coorectAnswer && count < 2 {
+//                answerB.setTitle(" ", for: .normal)
+//                count += 1
+//            }
+//            if answerD.titleLabel?.text != curentQuestion.coorectAnswer && count < 2 {
+//                answerD.setTitle(" ", for: .normal)
+//                count += 1
+//            }
+//            if answerA.titleLabel?.text != curentQuestion.coorectAnswer && count < 2 {
+//                answerA.setTitle(" ", for: .normal)
+//                count += 1
+//            }
+//        } else {
+//            showInfo()
+//        }
     }
+
+    // MARK: - Call Friend
 
     @objc func callButtonAction() {
         print("Pressed")
+        if callPrompt {
+            showInfoCallFriend()
+            callPrompt = false
+            callButton.tintColor = .darkGray
+        } else {
+            showInfo()
+        }
     }
+
+    /// - Звонок другу
+    func showInfoCallFriend() {
+        // Создаем контроллер
+//        let alert = UIAlertController(title: "Звоним Дмитрию Диброву",
+//                                      message: "Я думаю что это - \(qestionsArray[questionNumber].coorectAnswer)",
+//                                      preferredStyle: .alert)
+//        // Создаем кнопку для UIAlertController
+//        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//        // Добавляем кнопку на UIAlertController
+//        alert.addAction(action)
+//        // Показываем UIAlertController
+//        present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: - Help hall
 
     @objc func hallHelpButtonAction() {
         print("Pressed")
+        if helpHall {
+            showInfoHelpHall()
+            helpHall = false
+            hallHelpButton.tintColor = .darkGray
+        } else {
+            showInfo()
+        }
     }
+
+    /// - Помощь зала
+    func showInfoHelpHall() {
+        let alert = UIAlertController(title: "Результат опроса зала",
+                                      message: "A - 30% " + "B - 20% " + "C - 45% " + "D - 5%",
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: -
 
     @objc func aButtonAction() {
         aButton.shake()
@@ -203,11 +273,11 @@ class GameViewController: UIViewController {
 
     func showAlert() {
         let alert = UIAlertController(
-            title: "Game over!",
-            message: "",
+            title: "Время вышло!",
+            message: gameBrain?.wonAmount(),
             preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "OK!", style: .cancel, handler: { event in
+        alert.addAction(UIAlertAction(title: "В ГЛАВНОЕ МЕНЮ", style: .cancel, handler: { event in
             if let navigator = self.navigationController {
                 navigator.popViewController(animated: true)
             }
@@ -215,8 +285,22 @@ class GameViewController: UIViewController {
         self.present(alert, animated: true)
     }
 
+    func showInfo() {
+        let alert = UIAlertController(title: "Упс...",
+                                      message: "Вы уже использовали эту подсказку ;(",
+                                      preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+
     private func setupLayout() {
         NSLayoutConstraint.activate([
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
             fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
             fiftyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
             fiftyButton.widthAnchor.constraint(equalToConstant: 60),
