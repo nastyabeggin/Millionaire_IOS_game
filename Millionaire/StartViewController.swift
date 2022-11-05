@@ -60,7 +60,7 @@ class StartViewController: UIViewController {
         
         setupHierarchy()
         setupStartButton()
-        //        playSound(resource: "startApp")
+        playSound(resource: "startApp")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,7 +109,7 @@ class StartViewController: UIViewController {
         }
         viewController.gameBrain = gameBrain
         gameBrain.getQuestion()
-        //        playSound(resource: "waitForResponse")
+        playSound(resource: "waitForResponse")
     }
 
     @objc private func ruleButtonAction() {

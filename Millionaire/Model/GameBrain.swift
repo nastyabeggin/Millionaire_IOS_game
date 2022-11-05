@@ -32,7 +32,9 @@ class GameBrain {
     }
     
     func checkAnswer(_ userAnswer: String) -> Bool {
-        return userAnswer == currentAnswerCA
+        let check = userAnswer == currentQuestion
+        questions[numberOfQuestion].isAnswered = check
+        return check
     }
     
     func wonAmount() -> String {

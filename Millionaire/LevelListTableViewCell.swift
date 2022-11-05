@@ -23,10 +23,14 @@ class LevelListTableViewCell: UITableViewCell {
     var question: Question! {
         didSet {
             titleLabel.text = question.number
-            titleLabel.backgroundColor = question.isAnswered ? .systemGreen : .white
+            if let answer = question.isAnswered {
+                titleLabel.backgroundColor = answer ? .systemGreen : .systemRed
+            } else {
+                titleLabel.backgroundColor = .systemGray6
+            }
         }
     }
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
