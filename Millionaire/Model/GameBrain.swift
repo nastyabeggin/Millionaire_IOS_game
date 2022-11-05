@@ -12,6 +12,7 @@ class GameBrain {
     //MARK: - Properties
     var questions = Question.questions
     var numberOfQuestion = 0
+    var numberOfQuestionText: String?
     var currentQuestion: String?
     var currentAnswerA: String?
     var currentAnswerB: String?
@@ -23,6 +24,7 @@ class GameBrain {
     
     func getQuestion() {
         currentQuestion = questions[numberOfQuestion].text
+        numberOfQuestionText = questions[numberOfQuestion].number
         currentAnswerA = questions[numberOfQuestion].answer[0]
         currentAnswerB = questions[numberOfQuestion].answer[1]
         currentAnswerC = questions[numberOfQuestion].answer[2]
