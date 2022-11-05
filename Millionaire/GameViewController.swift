@@ -16,8 +16,8 @@ class GameViewController: UIViewController {
     private let bButton = CustomButton()
     private let cButton = CustomButton()
     private let dButton = CustomButton()
-    var myTimer = Timer()
-    var durationTimer = 30
+    var gameTimer = Timer()
+    var durationGAmeTimer = 30
 
     var fiftyFifty: Bool = true
     var callPrompt: Bool = true
@@ -50,8 +50,8 @@ class GameViewController: UIViewController {
     private let timeLabel: UILabel = {
         let label = UILabel()
         label.text = "30"
-        label.font = .systemFont(ofSize: 45)
-        label.textColor = .black
+        label.font = .systemFont(ofSize: 50)
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,7 +62,7 @@ class GameViewController: UIViewController {
         label.text = gameBrain?.currentQuestion
         label.numberOfLines = 4
         label.font = label.font.withSize(30)
-        label.textColor = .black
+        label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -130,7 +130,7 @@ class GameViewController: UIViewController {
     }
 
     private func startTimer() {
-        myTimer = Timer.scheduledTimer(timeInterval: 1,
+        gameTimer = Timer.scheduledTimer(timeInterval: 1,
                                     target: self,
                                     selector: (#selector(updateTimer)),
                                     userInfo: nil,
@@ -138,7 +138,7 @@ class GameViewController: UIViewController {
     }
 
     private func setNavigationBar() { // кастомная кнопка для навигейшенбара
-        navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.tintColor = .white
         let userInfoButton = createCustomButton(selector: #selector(tachMoneyButton))
         navigationItem.rightBarButtonItem = userInfoButton
 
@@ -152,11 +152,11 @@ class GameViewController: UIViewController {
     //MARK: - Button Action
 
     @objc func updateTimer() {
-        durationTimer -= 1
-        timeLabel.text = "\(durationTimer)"
+        durationGAmeTimer -= 1
+        timeLabel.text = "\(durationGAmeTimer)"
 
-        if durationTimer == 0 {
-            myTimer.invalidate()
+        if durationGAmeTimer == 0 {
+            gameTimer.invalidate()
             timeLabel.text = ""
             showAlert()
         }
