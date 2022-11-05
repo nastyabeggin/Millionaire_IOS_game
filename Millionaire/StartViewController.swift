@@ -103,11 +103,9 @@ class StartViewController: UIViewController {
     //MARK: - Actions
 
     @objc private func startButtonAction() {
-        let viewController = GameViewController()
-        if let navigator = navigationController {
-            navigator.pushViewController(viewController, animated: true)
-        }
-        viewController.gameBrain = gameBrain
+        let gameViewController = GameViewController()
+        self.navigationController?.pushViewController(gameViewController, animated: true)
+        gameViewController.gameBrain = gameBrain
         gameBrain.getQuestion()
         playSound(resource: "waitForResponse")
     }

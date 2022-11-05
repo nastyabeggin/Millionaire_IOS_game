@@ -16,6 +16,9 @@ class GameViewController: UIViewController {
     private let bButton = CustomButton()
     private let cButton = CustomButton()
     private let dButton = CustomButton()
+    var currentTitleAnswerButton: String?
+    var tagButton: Int?
+    var check: Bool?
     var gameTimer = Timer()
     var durationGAmeTimer = 30
 
@@ -103,22 +106,27 @@ class GameViewController: UIViewController {
 
     private func aButtonTapped() {
         aButton.setTitle(gameBrain?.currentAnswerA, for: .normal)
+        aButton.tag = 1
         aButton.addTarget(self, action: #selector(aButtonAction), for: .touchUpInside)
     }
 
     private func bButtonTapped() {
         bButton.setTitle(gameBrain?.currentAnswerB, for: .normal)
+        bButton.tag = 2
         bButton.addTarget(self, action: #selector(bButtonAction), for: .touchUpInside)
     }
 
     private func cButtonTapped() {
         cButton.setTitle(gameBrain?.currentAnswerC, for: .normal)
+        cButton.tag = 3
         cButton.addTarget(self, action: #selector(cButtonAction), for: .touchUpInside)
     }
 
     private func dButtonTapped() {
         dButton.setTitle(gameBrain?.currentAnswerD, for: .normal)
+        dButton.tag = 4
         dButton.addTarget(self, action: #selector(dButtonAction), for: .touchUpInside)
+        
     }
 
     //MARK: - Setups
@@ -162,6 +170,47 @@ class GameViewController: UIViewController {
             style: .done,
             target: self,
             action: #selector(gameOver))
+    }
+    
+    @objc func checkAnswer() {
+        check = gameBrain?.checkAnswer(currentTitleAnswerButton!)
+        switch tagButton {
+        case 1:
+            if check! {
+                aButton.backgroundColor = .green
+                playSound(resource: "correctAnswer")
+            } else {
+                aButton.backgroundColor = .red
+                playSound(resource: "wrongAnswer")
+            }
+        case 2:
+            if check! {
+                bButton.backgroundColor = .green
+                playSound(resource: "correctAnswer")
+                
+            } else {
+                bButton.backgroundColor = .red
+                playSound(resource: "wrongAnswer")
+            }
+        case 3:
+            if check! {
+                cButton.backgroundColor = .green
+                playSound(resource: "correctAnswer")
+            } else {
+                cButton.backgroundColor = .red
+                playSound(resource: "wrongAnswer")
+            }
+        case 4:
+            if check! {
+                dButton.backgroundColor = .green
+                playSound(resource: "correctAnswer")
+            } else {
+                dButton.backgroundColor = .red
+                playSound(resource: "wrongAnswer")
+            }
+        default:
+            print("Error")
+        }
     }
 
     //MARK: - Button Action
@@ -262,6 +311,9 @@ class GameViewController: UIViewController {
         (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
+        tagButton = aButton.tag
+        currentTitleAnswerButton = aButton.currentTitle
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
 
     @objc func bButtonAction() {
@@ -270,6 +322,10 @@ class GameViewController: UIViewController {
         (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
+        tagButton = bButton.tag
+        currentTitleAnswerButton = bButton.currentTitle
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
+
     }
 
     @objc func cButtonAction() {
@@ -278,6 +334,9 @@ class GameViewController: UIViewController {
         (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
+        tagButton = cButton.tag
+        currentTitleAnswerButton = cButton.currentTitle
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
 
     @objc func dButtonAction() {
@@ -286,6 +345,9 @@ class GameViewController: UIViewController {
         (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
+        tagButton = dButton.tag
+        currentTitleAnswerButton = dButton.currentTitle
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
 
     @objc func tachMoneyButton() {
@@ -297,6 +359,7 @@ class GameViewController: UIViewController {
             navigator.popViewController(animated: true)
         }
         player.stop()
+        gameBrain?.numberOfQuestion = 0
     }
 
     func showAlert() {
