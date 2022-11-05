@@ -263,20 +263,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    /// - Звонок другу
-    func showInfoCallFriend() {
-        // Создаем контроллер
-//        let alert = UIAlertController(title: "Звоним Дмитрию Диброву",
-//                                      message: "Я думаю что это - \(qestionsArray[questionNumber].coorectAnswer)",
-//                                      preferredStyle: .alert)
-//        // Создаем кнопку для UIAlertController
-//        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//        // Добавляем кнопку на UIAlertController
-//        alert.addAction(action)
-//        // Показываем UIAlertController
-//        present(alert, animated: true, completion: nil)
-    }
-    
     
     //MARK: - Actions after answer
 
