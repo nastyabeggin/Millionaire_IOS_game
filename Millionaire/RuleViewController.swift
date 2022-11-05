@@ -88,6 +88,7 @@ class RuleViewController: UIViewController{
         setupRulesContent()
         setupBackToMainScreenButton()
         startTimerForShowScrollIndicator()
+        setupBackgroundView()
     }
     
     //MARK: - Setups
@@ -122,6 +123,13 @@ class RuleViewController: UIViewController{
         self.backToMainScreenButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 50).isActive = true
         self.backToMainScreenButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -50).isActive = true
         self.backToMainScreenButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    }
+
+    private func setupBackgroundView() {
+        self.backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        self.backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        self.backgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        self.backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
     //MARK: - Actions
