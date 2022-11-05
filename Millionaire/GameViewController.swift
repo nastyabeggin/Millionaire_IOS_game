@@ -334,6 +334,21 @@ class GameViewController: UIViewController {
     }
     
     func messageForAlertOfHelpHall() -> String {
+        let correctAnswer = gameBrain?.currentAnswerCA
+        switch correctAnswer?.prefix(1){
+        case "A":
+            return "70% – A, 15% – B, 3% – C, 12% – D"
+        case "B":
+            return "15% – A, 70% – B, 3% – C, 12% – D"
+        case "C":
+            return "3% – A, 15% – B, 70% – C, 12% – D"
+        case "D":
+            return "12% – A, 15% – B, 3% – C, 70% – D"
+        case .none:
+            print("some error occured")
+        case .some(_):
+            print("some error occured")
+        }
         return ""
     }
     
