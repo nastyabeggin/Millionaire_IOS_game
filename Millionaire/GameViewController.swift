@@ -166,7 +166,8 @@ class GameViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         let userInfoButton = createCustomButton(selector: #selector(tachMoneyButton))
         navigationItem.rightBarButtonItem = userInfoButton
-
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+            navigationItem.title = "Сумма: \(gameBrain?.numberOfQuestionText ?? "")"
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "xmark.circle"),
             style: .done,
@@ -181,38 +182,50 @@ class GameViewController: UIViewController {
             if check! {
                 aButton.backgroundColor = .green
                 playSound(resource: "correctAnswer")
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 aButton.backgroundColor = .red
                 playSound(resource: "wrongAnswer")
+                showAlertWrongAnswer()
             }
         case 2:
             if check! {
                 bButton.backgroundColor = .green
                 playSound(resource: "correctAnswer")
-                
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 bButton.backgroundColor = .red
                 playSound(resource: "wrongAnswer")
+                showAlertWrongAnswer()
             }
         case 3:
             if check! {
                 cButton.backgroundColor = .green
                 playSound(resource: "correctAnswer")
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 cButton.backgroundColor = .red
                 playSound(resource: "wrongAnswer")
+                showAlertWrongAnswer()
             }
         case 4:
             if check! {
                 dButton.backgroundColor = .green
                 playSound(resource: "correctAnswer")
+                Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 dButton.backgroundColor = .red
                 playSound(resource: "wrongAnswer")
+                showAlertWrongAnswer()
             }
         default:
             print("Error")
         }
+    }
+    
+    @objc func goToLevelListViewController() {
+        let levelListViewController = LevelListViewController()
+        self.navigationController?.pushViewController(levelListViewController, animated: true)
     }
 
     //MARK: - Button Action
@@ -224,7 +237,7 @@ class GameViewController: UIViewController {
         if durationGAmeTimer == 0 {
             gameTimer.invalidate()
             timeLabel.text = ""
-            showAlert()
+            showAlertEndOfTime()
         }
     }
 
@@ -284,20 +297,24 @@ class GameViewController: UIViewController {
             helpHall = false
             hallHelpButton.backgroundColor = .white
         } else {
-            showInfo()
+            showAlertHint()
         }
     }
 
     /// - Помощь зала
     func showInfoHelpHall() {
         let alert = UIAlertController(title: "Результат опроса зала",
-                                      message: "A - 30% " + "B - 20% " + "C - 45% " + "D - 5%",
+                                      message: messageForAlertOfHelpHall(),
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-
+    
+    func messageForAlertOfHelpHall() -> String {
+        return ""
+    }
+    
     // MARK: - Possible error
 
     @objc func possibleErrorButtonAction() {
@@ -307,7 +324,7 @@ class GameViewController: UIViewController {
             possibleError = false
             possibleErrorButton.backgroundColor = .white
         } else {
-            showInfo()
+            showAlertHint()
         }
     }
 
@@ -336,7 +353,7 @@ class GameViewController: UIViewController {
         playSound(resource: "waitForInspection")
         tagButton = aButton.tag
         currentTitleAnswerButton = aButton.currentTitle
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
 
     @objc func bButtonAction() {
@@ -347,7 +364,7 @@ class GameViewController: UIViewController {
         playSound(resource: "waitForInspection")
         tagButton = bButton.tag
         currentTitleAnswerButton = bButton.currentTitle
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
 
     }
 
@@ -359,7 +376,7 @@ class GameViewController: UIViewController {
         playSound(resource: "waitForInspection")
         tagButton = cButton.tag
         currentTitleAnswerButton = cButton.currentTitle
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
 
     @objc func dButtonAction() {
@@ -370,7 +387,7 @@ class GameViewController: UIViewController {
         playSound(resource: "waitForInspection")
         tagButton = dButton.tag
         currentTitleAnswerButton = dButton.currentTitle
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
 
     @objc func tachMoneyButton() {
@@ -385,13 +402,13 @@ class GameViewController: UIViewController {
         gameBrain?.numberOfQuestion = 0
     }
 
-    func showAlert() {
+    func showAlertEndOfTime() {
         let alert = UIAlertController(
-            title: "Время вышло!",
+            title: "ВРЕМЯ ВЫШЛО",
             message: gameBrain?.wonAmount(),
             preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "В ГЛАВНОЕ МЕНЮ", style: .cancel, handler: { event in
+        alert.addAction(UIAlertAction(title: "ЗАКОНЧИТЬ ИГРУ", style: .cancel, handler: { event in
             if let navigator = self.navigationController {
                 navigator.popViewController(animated: true)
             }
@@ -399,13 +416,28 @@ class GameViewController: UIViewController {
         self.present(alert, animated: true)
     }
 
-    func showInfo() {
+    func showAlertHint() {
         let alert = UIAlertController(title: "Упс...",
                                       message: "Вы уже использовали эту подсказку 😕",
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func showAlertWrongAnswer() {
+        let alert = UIAlertController(
+            title: "НЕПРАВИЛЬНО",
+            message: gameBrain?.wonAmount(),
+            preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "ЗАКОНЧИТЬ ИГРУ", style: .cancel, handler: { event in
+            if let navigator = self.navigationController {
+                navigator.popViewController(animated: true)
+            }
+            self.gameBrain?.numberOfQuestion = 0
+        }))
+        self.present(alert, animated: true)
     }
 
     private func setupLayout() {
