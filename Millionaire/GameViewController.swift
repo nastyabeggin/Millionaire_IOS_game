@@ -25,7 +25,8 @@ class GameViewController: UIViewController {
     var fiftyFifty: Bool = true
     var helpHall: Bool = true
     var possibleError: Bool = true
-    
+    var isRepeatedAnswerAllowed: Bool = false
+    var answeredSecondTime: Bool = false
     
     //MARK: - UIElements
 
@@ -184,6 +185,9 @@ class GameViewController: UIViewController {
                 Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 aButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
                 showAlertWrongAnswer()
             }
@@ -194,6 +198,9 @@ class GameViewController: UIViewController {
                 Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 bButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
                 showAlertWrongAnswer()
             }
@@ -204,6 +211,9 @@ class GameViewController: UIViewController {
                 Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 cButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
                 showAlertWrongAnswer()
             }
@@ -214,6 +224,9 @@ class GameViewController: UIViewController {
                 Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(goToLevelListViewController), userInfo: nil, repeats: false)
             } else {
                 dButton.backgroundColor = .red
+                if !answeredSecondTime && !possibleError{
+                    startTimer()
+                }
                 playSound(resource: "wrongAnswer")
                 showAlertWrongAnswer()
             }
@@ -322,19 +335,34 @@ class GameViewController: UIViewController {
         print("Pressed")
         if possibleError {
             possibleError = false
+            isRepeatedAnswerAllowed = true
             possibleErrorButton.backgroundColor = .white
         } else {
             showAlertHint()
         }
     }
 
+    //MARK: - Handle buttons
+    
+    func handleButtons(){
+        if possibleError{
+            (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        } else if isRepeatedAnswerAllowed{
+            (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (true, true, true, true)
+            isRepeatedAnswerAllowed = false
+            answeredSecondTime = false
+        } else{
+            (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+            answeredSecondTime = true
+        }
+    }
     
     //MARK: - Actions after answer
 
     @objc func aButtonAction() {
         aButton.shake()
         aButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = aButton.tag
@@ -345,7 +373,7 @@ class GameViewController: UIViewController {
     @objc func bButtonAction() {
         bButton.shake()
         bButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = bButton.tag
@@ -357,7 +385,7 @@ class GameViewController: UIViewController {
     @objc func cButtonAction() {
         cButton.shake()
         cButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = cButton.tag
@@ -368,7 +396,7 @@ class GameViewController: UIViewController {
     @objc func dButtonAction() {
         dButton.shake()
         dButton.backgroundColor = .white
-        (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
+        handleButtons()
         gameTimer.invalidate()
         playSound(resource: "waitForInspection")
         tagButton = dButton.tag
