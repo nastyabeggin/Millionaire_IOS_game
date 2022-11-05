@@ -23,8 +23,7 @@ class GameViewController: UIViewController {
     var helpHall: Bool = true
     var possibleError: Bool = true
     
-    var fiftyFiftyButtonTapped: Bool = false
-
+    
     //MARK: - UIElements
 
     private let backgroundView: UIImageView = {
@@ -182,7 +181,7 @@ class GameViewController: UIViewController {
     // MARK: - 50/50
 
     @objc func fiftyButtonAction() {
-        if !fiftyFiftyButtonTapped{
+        if fiftyFifty{
             fiftyButton.backgroundColor = .white
             let correctAnswer = gameBrain?.currentAnswerCA
             let wrongAnswers = [gameBrain?.currentAnswerA,                                     gameBrain?.currentAnswerB,
@@ -222,7 +221,9 @@ class GameViewController: UIViewController {
             default:
                 print("some error occured")
             }
-            fiftyFiftyButtonTapped = true
+            fiftyFifty = false
+        } else {
+            showInfo()
         }
     }
 
