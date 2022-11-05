@@ -16,6 +16,9 @@ class LevelListTableViewCell: UITableViewCell {
         view.text = "?"
         view.font = .systemFont(ofSize: 15)
         view.textAlignment = .center
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        view.layer.cornerCurve = .continuous
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -23,7 +26,11 @@ class LevelListTableViewCell: UITableViewCell {
     var question: Question! {
         didSet {
             titleLabel.text = question.number
-            titleLabel.backgroundColor = question.isAnswered ? .systemGreen : .white
+            if let answer = question.isAnswered {
+                titleLabel.backgroundColor = answer ? .systemGreen : .systemRed
+            } else {
+                titleLabel.backgroundColor = .systemGray6
+            }
         }
     }
 
@@ -40,13 +47,14 @@ class LevelListTableViewCell: UITableViewCell {
 
 private extension LevelListTableViewCell {
     func setup() {
-        
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5)
         ])
     }
 }
