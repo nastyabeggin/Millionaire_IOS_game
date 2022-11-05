@@ -67,8 +67,8 @@ class GameViewController: UIViewController {
     private lazy var questionsLabel: UILabel = {
         let label = UILabel()
         label.text = gameBrain?.currentQuestion
-        label.numberOfLines = 4
-        label.font = label.font.withSize(30)
+        label.numberOfLines = 5
+        label.font = label.font.withSize(28)
         label.textColor = .white
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false

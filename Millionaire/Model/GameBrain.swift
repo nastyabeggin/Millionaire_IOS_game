@@ -41,11 +41,11 @@ class GameBrain {
     
  func wonAmount() -> String {
         switch numberOfQuestion {
-        case 0...4:
+        case 0...5:
             return "Вы ничего не выиграли 😕"
-        case 4...9:
+        case 6...10:
             return "Ваш выигрыш 1 000 рублей!"
-        case 9...14:
+        case 11...14:
             return "Ваш выигрыш 32 000 рублей!"
         default:
             return ""
