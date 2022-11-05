@@ -7,7 +7,17 @@
 
 import UIKit
 
+
+extension NSMutableAttributedString {
+    public func getRangeOfString(textToFind:String)->NSRange{
+        let foundRange = self.mutableString.range(of: textToFind)
+        
+        return foundRange
+    }
+}
+
 class RuleViewController: UIViewController{
+    var timerForShowScrollIndicator: Timer?
     
     //MARK: - UIElements
     
@@ -27,16 +37,31 @@ class RuleViewController: UIViewController{
         return heading
     }()
     
-    private lazy var rulesContent: UILabel = {
-        let content = UILabel()
-        content.text = "    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        content.numberOfLines = 0
-        content.textColor = .white
-        content.font = UIFont.systemFont(ofSize: 25, weight: .regular)
+    private lazy var rulesContent: UITextView = {
+        let content = UITextView()
+        let myAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22.5, weight: .regular),
+                            NSAttributedString.Key.foregroundColor: UIColor.white,
+                            ]
+        let myString = NSMutableAttributedString(string: "  Для того чтобы заработать миллион рублей необходимо ответить на 15 вопросов из различных областей знаний.\n\nКаждый вопрос имеет 4 варианта ответа, из которых один верный.\n\nСуществуют три несгораемых суммы:\n- 1 000 рублей \n- 32 000 рублей \n- 1 000 000 рублей\n\nТакже есть три подсказки: \n- 50/50: исчезнут 2 неверных ответа. \n- Помощь зала: зал поможет с ответом.\n-Право на ошибку: возможность ответить неверно на вопрос, и игра на этом не закончится.\n\nВы можете забрать сумму в любой момент, пока не ответили неверно. Удачной игры!", attributes: myAttribute )
+        var anotherAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23, weight: .bold),
+                                 NSAttributedString.Key.foregroundColor: UIColor.yellow,
+                                 ]
+        var keyPhrases = ["4", "15", " миллион рублей", "1 000", "32 000", "1 000 000", "50/50:", "Помощь зала:", "Право на ошибку:", "Удачной игры!"]
+        for element in keyPhrases{
+            var myRange = myString.getRangeOfString(textToFind: element)
+            myString.addAttributes(anotherAttribute, range: myRange)
+        }
+        anotherAttribute = [ NSAttributedString.Key.font: UIFont.systemFont(ofSize: 23, weight: .bold),
+                                 ]
+        keyPhrases = ["Существуют три несгораемых суммы:", "Также есть три подсказки:"]
+        for element in keyPhrases{
+            var myRange = myString.getRangeOfString(textToFind: element)
+            myString.addAttributes(anotherAttribute, range: myRange)
+        }
+        content.attributedText = myString
+        content.backgroundColor = .clear
+        content.isEditable = false
         content.translatesAutoresizingMaskIntoConstraints = false
-        content.minimumScaleFactor = 0.1
-        content.adjustsFontSizeToFitWidth = true
-        content.lineBreakMode = .byClipping
         return content
     }()
     
@@ -62,10 +87,16 @@ class RuleViewController: UIViewController{
         setupRulesHeading()
         setupRulesContent()
         setupBackToMainScreenButton()
+        startTimerForShowScrollIndicator()
     }
     
     //MARK: - Setups
  
+        
+    private func startTimerForShowScrollIndicator() {
+        self.timerForShowScrollIndicator = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.showScrollIndicatorsInContacts), userInfo: nil, repeats: true)
+    }
+    
     private func setupHierarchy() {
         view.addSubview(backgroundView)
         view.addSubview(rulesHeading)
@@ -98,4 +129,10 @@ class RuleViewController: UIViewController{
     @objc private func backToMainScreenButtonAction() {
         self.navigationController?.popViewController(animated: true)
    }
+    
+    @objc func showScrollIndicatorsInContacts() {
+            UIView.animate(withDuration: 0.001) {
+                self.rulesContent.flashScrollIndicators()
+            }
+        }
 }
