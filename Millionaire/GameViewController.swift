@@ -25,6 +25,8 @@ class GameViewController: UIViewController {
     var fiftyFifty: Bool = true
     var helpHall: Bool = true
     var possibleError: Bool = true
+    
+    var fiftyFiftyButtonTapped: Bool = false
 
     //MARK: - UIElements
 
@@ -229,27 +231,48 @@ class GameViewController: UIViewController {
     // MARK: - 50/50
 
     @objc func fiftyButtonAction() {
-        print("Pressed")
-//        if fiftyFifty {
-//            fiftyFifty = false
-//            fiftyButton.tintColor = .darkGray
-//            var count = 0
-//            let curentQuestion = qestionsArray[questionNumber]
-//            if answerB.titleLabel?.text != curentQuestion.coorectAnswer && count < 2 {
-//                answerB.setTitle(" ", for: .normal)
-//                count += 1
-//            }
-//            if answerD.titleLabel?.text != curentQuestion.coorectAnswer && count < 2 {
-//                answerD.setTitle(" ", for: .normal)
-//                count += 1
-//            }
-//            if answerA.titleLabel?.text != curentQuestion.coorectAnswer && count < 2 {
-//                answerA.setTitle(" ", for: .normal)
-//                count += 1
-//            }
-//        } else {
-//            showInfo()
-//        }
+        if !fiftyFiftyButtonTapped{
+            fiftyButton.backgroundColor = .white
+            let correctAnswer = gameBrain?.currentAnswerCA
+            let wrongAnswers = [gameBrain?.currentAnswerA,                                     gameBrain?.currentAnswerB,
+                                gameBrain?.currentAnswerC,
+                                gameBrain?.currentAnswerD]
+            var randomWrongAnswer = wrongAnswers.randomElement()
+            while (randomWrongAnswer == correctAnswer){
+                randomWrongAnswer = wrongAnswers.randomElement()
+            }
+            aButton.setTitle(" ", for: .normal)
+            bButton.setTitle(" ", for: .normal)
+            cButton.setTitle(" ", for: .normal)
+            dButton.setTitle(" ", for: .normal)
+            switch correctAnswer?.prefix(1){
+            case "A":
+                aButton.setTitle(correctAnswer, for: .normal)
+            case "B":
+                bButton.setTitle(correctAnswer, for: .normal)
+            case "C":
+                cButton.setTitle(correctAnswer, for: .normal)
+            case "D":
+                dButton.setTitle(correctAnswer, for: .normal)
+            case .none:
+                print("some error occured")
+            case .some(_):
+                print("some error occured")
+            }
+            switch randomWrongAnswer!!.prefix(1){
+            case "A":
+                aButton.setTitle(randomWrongAnswer!!, for: .normal)
+            case "B":
+                bButton.setTitle(randomWrongAnswer!!, for: .normal)
+            case "C":
+                cButton.setTitle(randomWrongAnswer!!, for: .normal)
+            case "D":
+                dButton.setTitle(randomWrongAnswer!!, for: .normal)
+            default:
+                print("some error occured")
+            }
+            fiftyFiftyButtonTapped = true
+        }
     }
 
     // MARK: - Help hall
@@ -259,7 +282,7 @@ class GameViewController: UIViewController {
         if helpHall {
             showInfoHelpHall()
             helpHall = false
-            hallHelpButton.backgroundColor = .darkGray
+            hallHelpButton.backgroundColor = .white
         } else {
             showInfo()
         }
@@ -282,7 +305,7 @@ class GameViewController: UIViewController {
         if possibleError {
             showInfoCallFriend()
             possibleError = false
-            possibleErrorButton.backgroundColor = .darkGray
+            possibleErrorButton.backgroundColor = .white
         } else {
             showInfo()
         }
