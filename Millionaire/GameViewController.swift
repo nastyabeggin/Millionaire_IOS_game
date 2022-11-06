@@ -88,6 +88,7 @@ class GameViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.title = "Вопрос на \(gameBrain?.numberOfQuestionText ?? "")"
         updateAnswerButtons()
     }
 
@@ -107,26 +108,30 @@ class GameViewController: UIViewController {
     }
 
     private func aButtonTapped() {
-        aButton.setTitle(gameBrain?.currentAnswerA, for: .normal)
         aButton.tag = 1
+        aButton.setTitle(gameBrain?.currentAnswerA, for: .normal)
+        aButton.setTitleColor(.black, for: .normal)
         aButton.addTarget(self, action: #selector(aButtonAction), for: .touchUpInside)
     }
 
     private func bButtonTapped() {
-        bButton.setTitle(gameBrain?.currentAnswerB, for: .normal)
         bButton.tag = 2
+        bButton.setTitle(gameBrain?.currentAnswerB, for: .normal)
+        bButton.setTitleColor(.black, for: .normal)
         bButton.addTarget(self, action: #selector(bButtonAction), for: .touchUpInside)
     }
 
     private func cButtonTapped() {
-        cButton.setTitle(gameBrain?.currentAnswerC, for: .normal)
         cButton.tag = 3
+        cButton.setTitle(gameBrain?.currentAnswerC, for: .normal)
+        cButton.setTitleColor(.black, for: .normal)
         cButton.addTarget(self, action: #selector(cButtonAction), for: .touchUpInside)
     }
 
     private func dButtonTapped() {
-        dButton.setTitle(gameBrain?.currentAnswerD, for: .normal)
         dButton.tag = 4
+        dButton.setTitle(gameBrain?.currentAnswerD, for: .normal)
+        dButton.setTitleColor(.black, for: .normal)
         dButton.addTarget(self, action: #selector(dButtonAction), for: .touchUpInside)
         
     }
@@ -167,7 +172,6 @@ class GameViewController: UIViewController {
         let userInfoButton = createCustomButton(selector: #selector(tachMoneyButton))
         navigationItem.rightBarButtonItem = userInfoButton
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navigationItem.title = "Сумма: \(gameBrain?.numberOfQuestionText ?? "")"
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "xmark.circle"),
             style: .done,
@@ -258,7 +262,6 @@ class GameViewController: UIViewController {
     @objc func updateTimer() {
         durationGAmeTimer -= 1
         timeLabel.text = "\(durationGAmeTimer)"
-
         if durationGAmeTimer == 0 {
             gameTimer.invalidate()
             timeLabel.text = ""
@@ -276,7 +279,7 @@ class GameViewController: UIViewController {
                                 gameBrain?.currentAnswerC,
                                 gameBrain?.currentAnswerD]
             var randomWrongAnswer = wrongAnswers.randomElement()
-            while (randomWrongAnswer == correctAnswer){
+            while (randomWrongAnswer == correctAnswer) {
                 randomWrongAnswer = wrongAnswers.randomElement()
             }
             aButton.setTitle(" ", for: .normal)
@@ -341,6 +344,7 @@ class GameViewController: UIViewController {
         switch correctAnswer?.prefix(1){
         case "A":
             return """
+                    
                     A▫️▫️▫️▫️▫️▫️▫️70%
                     B▫️▫️▫️___________15%
                     C▫️_________________5%
@@ -348,6 +352,7 @@ class GameViewController: UIViewController {
                     """
         case "B":
             return """
+                    
                     A▫️▫️▫️___________15%
                     B▫️▫️▫️▫️▫️▫️▫️70%
                     C▫️_________________5%
@@ -355,6 +360,7 @@ class GameViewController: UIViewController {
                     """
         case "C":
             return """
+                    
                     A▫️_________________5%
                     B▫️▫️▫️___________15%
                     C▫️▫️▫️▫️▫️▫️▫️70%
@@ -362,6 +368,7 @@ class GameViewController: UIViewController {
                     """
         case "D":
             return """
+                    
                     A▫️▫️_____________10%
                     B▫️▫️▫️___________15%
                     C▫️_________________5%
@@ -453,9 +460,7 @@ class GameViewController: UIViewController {
     }
 
     @objc func gameOver() {
-        if let navigator = navigationController {
-            navigator.popViewController(animated: true)
-        }
+        self.navigationController?.popToRootViewController(animated: true)
         player.stop()
         gameBrain?.numberOfQuestion = 0
     }
@@ -476,7 +481,7 @@ class GameViewController: UIViewController {
 
     func showAlertHint() {
         let alert = UIAlertController(title: "Упс...",
-                                      message: "Вы уже использовали эту подсказку 😕",
+                                      message: "\nВы уже использовали эту подсказку 😕",
                                       preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
@@ -568,6 +573,8 @@ extension GameViewController: LevelListViewControllerDelegate {
         gameBrain?.getQuestion()
         startTimer()
         answerButton()
+        timeLabel.text = "30"
+        questionsLabel.text = gameBrain?.currentQuestion
         playSound(resource: "waitForResponse")
     }
 }
