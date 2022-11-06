@@ -26,7 +26,8 @@ class LevelListView: UIView {
     private lazy var nextLevelButton: UIButton = {
         let view = UIButton()
         view.setTitle("Следующий вопрос", for: .normal)
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .yellow
+        view.setTitleColor(.black, for: .normal)
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
         view.layer.cornerCurve = .continuous
@@ -63,10 +64,10 @@ private extension LevelListView {
         
         addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -50)
+            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -60)
         ])
         
         addSubview(nextLevelButton)
