@@ -50,8 +50,8 @@ class GameViewController: UIViewController {
     }
     
     private lazy var fiftyButton = helpButton(text: "dices.png", action: #selector(fiftyButtonAction))
-    private lazy var possibleErrorButton = helpButton(text: "mistake.png", action: #selector(possibleErrorButtonAction))
     private lazy var hallHelpButton = helpButton(text: "people.png", action: #selector(hallHelpButtonAction))
+    private lazy var possibleErrorButton = helpButton(text: "mistake.png", action: #selector(possibleErrorButtonAction))
     
     
     private let timeLabel: UILabel = {
@@ -67,7 +67,7 @@ class GameViewController: UIViewController {
     private lazy var questionsLabel: UILabel = {
         let label = UILabel()
         label.text = gameBrain?.currentQuestion
-        label.numberOfLines = 6
+        label.numberOfLines = 7
         label.font = label.font.withSize(28)
         label.textColor = .white
         label.textAlignment = .center
@@ -159,6 +159,7 @@ class GameViewController: UIViewController {
         cButton.backgroundColor = .yellow
         dButton.backgroundColor = .yellow
         (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (true, true, true, true)
+        (fiftyButton.isEnabled, hallHelpButton.isEnabled, possibleErrorButton.isEnabled) = (true, true, true)
     }
     
     private func startTimer() {
@@ -169,7 +170,7 @@ class GameViewController: UIViewController {
                                          repeats: true)
     }
     
-    private func setNavigationBar() { // кастомная кнопка для навигейшенбара
+    private func setNavigationBar() {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -181,6 +182,11 @@ class GameViewController: UIViewController {
             let userInfoButton = createCustomButton(selector: #selector(tachMoneyButton))
             navigationItem.rightBarButtonItem = userInfoButton
         }
+    }
+    
+    private func hideNavigationBarItems() {
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     @objc func checkAnswer() {
@@ -279,7 +285,8 @@ class GameViewController: UIViewController {
         if fiftyFifty{
             fiftyButton.backgroundColor = .white
             let correctAnswer = gameBrain?.currentAnswerCA
-            let wrongAnswers = [gameBrain?.currentAnswerA,                                     gameBrain?.currentAnswerB,
+            let wrongAnswers = [gameBrain?.currentAnswerA,
+                                gameBrain?.currentAnswerB,
                                 gameBrain?.currentAnswerC,
                                 gameBrain?.currentAnswerD]
             var randomWrongAnswer = wrongAnswers.randomElement()
@@ -290,15 +297,20 @@ class GameViewController: UIViewController {
             bButton.setTitle(" ", for: .normal)
             cButton.setTitle(" ", for: .normal)
             dButton.setTitle(" ", for: .normal)
+            (aButton.isEnabled, bButton.isEnabled, cButton.isEnabled, dButton.isEnabled) = (false, false, false, false)
             switch correctAnswer?.prefix(1){
             case "A":
                 aButton.setTitle(correctAnswer, for: .normal)
+                aButton.isEnabled = true
             case "B":
                 bButton.setTitle(correctAnswer, for: .normal)
+                bButton.isEnabled = true
             case "C":
                 cButton.setTitle(correctAnswer, for: .normal)
+                cButton.isEnabled = true
             case "D":
                 dButton.setTitle(correctAnswer, for: .normal)
+                dButton.isEnabled = true
             case .none:
                 print("some error occured")
             case .some(_):
@@ -307,12 +319,16 @@ class GameViewController: UIViewController {
             switch randomWrongAnswer!!.prefix(1){
             case "A":
                 aButton.setTitle(randomWrongAnswer!!, for: .normal)
+                aButton.isEnabled = true
             case "B":
                 bButton.setTitle(randomWrongAnswer!!, for: .normal)
+                bButton.isEnabled = true
             case "C":
                 cButton.setTitle(randomWrongAnswer!!, for: .normal)
+                cButton.isEnabled = true
             case "D":
                 dButton.setTitle(randomWrongAnswer!!, for: .normal)
+                dButton.isEnabled = true
             default:
                 print("some error occured")
             }
@@ -420,22 +436,22 @@ class GameViewController: UIViewController {
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -90),
+            fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -50),
             fiftyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
             fiftyButton.widthAnchor.constraint(equalToConstant: 60),
             fiftyButton.heightAnchor.constraint(equalToConstant: 60),
             
-            hallHelpButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -90),
+            hallHelpButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -50),
             hallHelpButton.leadingAnchor.constraint(equalTo: fiftyButton.trailingAnchor, constant: 40),
             hallHelpButton.widthAnchor.constraint(equalToConstant: 60),
             hallHelpButton.heightAnchor.constraint(equalToConstant: 60),
             
-            possibleErrorButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -90),
+            possibleErrorButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -50),
             possibleErrorButton.leadingAnchor.constraint(equalTo: hallHelpButton.trailingAnchor, constant: 40),
             possibleErrorButton.widthAnchor.constraint(equalToConstant: 60),
             possibleErrorButton.heightAnchor.constraint(equalToConstant: 60),
             
-            timeLabel.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: 30),
+            timeLabel.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: 50),
             timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeLabel.widthAnchor.constraint(equalToConstant: 80),
             timeLabel.heightAnchor.constraint(equalToConstant: 80),
@@ -443,9 +459,9 @@ class GameViewController: UIViewController {
             questionsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             questionsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             questionsLabel.widthAnchor.constraint(equalToConstant: 330),
-            questionsLabel.heightAnchor.constraint(equalToConstant: 200),
+            questionsLabel.heightAnchor.constraint(equalToConstant: 300),
             
-            aButton.topAnchor.constraint(equalTo: questionsLabel.bottomAnchor, constant: 60),
+            aButton.topAnchor.constraint(equalTo: questionsLabel.bottomAnchor, constant: 0),
             aButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             aButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             aButton.heightAnchor.constraint(equalToConstant: 50),
@@ -474,9 +490,11 @@ class GameViewController: UIViewController {
         aButton.backgroundColor = .white
         handleButtons()
         gameTimer.invalidate()
+        hideNavigationBarItems()
         playSound(resource: "waitForInspection")
         tagButton = aButton.tag
         currentTitleAnswerButton = aButton.currentTitle
+        (fiftyButton.isEnabled, hallHelpButton.isEnabled, possibleErrorButton.isEnabled) = (false, false, false)
         Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
     
@@ -485,9 +503,11 @@ class GameViewController: UIViewController {
         bButton.backgroundColor = .white
         handleButtons()
         gameTimer.invalidate()
+        hideNavigationBarItems()
         playSound(resource: "waitForInspection")
         tagButton = bButton.tag
         currentTitleAnswerButton = bButton.currentTitle
+        (fiftyButton.isEnabled, hallHelpButton.isEnabled, possibleErrorButton.isEnabled) = (false, false, false)
         Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
     
@@ -496,9 +516,11 @@ class GameViewController: UIViewController {
         cButton.backgroundColor = .white
         handleButtons()
         gameTimer.invalidate()
+        hideNavigationBarItems()
         playSound(resource: "waitForInspection")
         tagButton = cButton.tag
         currentTitleAnswerButton = cButton.currentTitle
+        (fiftyButton.isEnabled, hallHelpButton.isEnabled, possibleErrorButton.isEnabled) = (false, false, false)
         Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
     
@@ -507,9 +529,11 @@ class GameViewController: UIViewController {
         dButton.backgroundColor = .white
         handleButtons()
         gameTimer.invalidate()
+        hideNavigationBarItems()
         playSound(resource: "waitForInspection")
         tagButton = dButton.tag
         currentTitleAnswerButton = dButton.currentTitle
+        (fiftyButton.isEnabled, hallHelpButton.isEnabled, possibleErrorButton.isEnabled) = (false, false, false)
         Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(checkAnswer), userInfo: nil, repeats: false)
     }
     
