@@ -4,6 +4,7 @@ protocol LevelListViewDelegate: AnyObject {
     func nextLevelButtonTapped()
     func getNumberOfQuestions() -> Int
     func getQuestion(_ indexPath: IndexPath) -> Question
+    func getNumberOfCompletedQuestions() -> Int
 }
 
 class LevelListView: UIView {
@@ -79,6 +80,10 @@ private extension LevelListView {
 }
 
 extension LevelListView: LevelListTableViewDataSourceDelegate {
+    func numberOfCompletedQuestions() -> Int {
+        return delegate.getNumberOfCompletedQuestions()
+    }
+    
     func numberOfRowsInSection() -> Int {
         delegate.getNumberOfQuestions()
     }
