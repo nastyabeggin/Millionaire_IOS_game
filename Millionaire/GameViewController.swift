@@ -250,9 +250,7 @@ class GameViewController: UIViewController {
     @objc func goToLevelListViewController() {
         if gameBrain!.numberOfQuestion < 14 {
             let levelListViewController = LevelListViewController(delegate: self, questions: gameBrain?.questions ?? [], numberOfCompletedQuestions: gameBrain?.numberOfQuestion ?? 0)
-            levelListViewController.modalPresentationStyle = .fullScreen
-            present(levelListViewController, animated: true)
-            durationGAmeTimer = 30
+            navigationController?.pushViewController(levelListViewController, animated: true)
         } else {
             let finalResultViewController = FinalResultViewController()
             navigationController?.pushViewController(finalResultViewController, animated: true)

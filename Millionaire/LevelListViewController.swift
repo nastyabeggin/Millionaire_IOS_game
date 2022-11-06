@@ -35,7 +35,17 @@ class LevelListViewController: UIViewController {
 
 private extension LevelListViewController {
     func setup() {
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "xmark.circle"),
+            style: .done,
+            target: self,
+            action: #selector(gameOver))
+    }
+}
+
+@objc private extension LevelListViewController {
+    @objc func gameOver() {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
 
@@ -46,7 +56,7 @@ extension LevelListViewController: LevelListViewDelegate {
     
     func nextLevelButtonTapped() {
         delegate.nextLevel()
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func getNumberOfQuestions() -> Int {

@@ -8,10 +8,6 @@
 import UIKit
 
 class StartViewController: UIViewController {
-
-    //MARK: - Properties
-    
-    var gameBrain = GameBrain()
     
     //MARK: - UIElements
     
@@ -105,6 +101,7 @@ class StartViewController: UIViewController {
     @objc private func startButtonAction() {
         let gameViewController = GameViewController()
         self.navigationController?.pushViewController(gameViewController, animated: true)
+        var gameBrain = GameBrain()
         gameViewController.gameBrain = gameBrain
         gameBrain.getQuestion()
         playSound(resource: "waitForResponse")
