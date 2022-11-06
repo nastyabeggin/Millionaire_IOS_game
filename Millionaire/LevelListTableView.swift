@@ -43,7 +43,6 @@ extension LevelListTableView: UITableViewDataSource, UITableViewDelegate {
             fatalError("Error with casting type = \(LevelListTableViewCell.self)")
         }
         let content = dataSourceDelegate.cellForRowAt(indexPath)
-        print(dataSourceDelegate.numberOfCompletedQuestions())
         cell.question = content
         let count = dataSourceDelegate.numberOfRowsInSection() - indexPath.row
         if count <= dataSourceDelegate.numberOfCompletedQuestions() {
