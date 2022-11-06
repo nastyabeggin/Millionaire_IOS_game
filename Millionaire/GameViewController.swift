@@ -245,11 +245,12 @@ class GameViewController: UIViewController {
     
     @objc func goToLevelListViewController() {
         if gameBrain!.numberOfQuestion < 14 {
-            let levelListViewController = LevelListViewController()
-            self.navigationController?.pushViewController(levelListViewController, animated: true)
+            let levelListViewController = LevelListViewController(delegate: self, questions: gameBrain?.questions ?? [], numberOfCompletedQuestions: gameBrain?.numberOfQuestion ?? 0)
+            levelListViewController.modalPresentationStyle = .fullScreen
+            present(levelListViewController, animated: true)
         } else {
             let finalResultViewController = FinalResultViewController()
-            self.navigationController?.pushViewController(finalResultViewController, animated: true)
+            navigationController?.pushViewController(finalResultViewController, animated: true)
         }
     }
 
@@ -560,5 +561,14 @@ extension UIStackView {
         self.spacing = spacing
         self.distribution = distribution
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+extension GameViewController: LevelListViewControllerDelegate {
+    func nextLevel() {
+        gameBrain?.getQuestion()
+        startTimer()
+        answerButton()
+        playSound(resource: "waitForResponse")
     }
 }
