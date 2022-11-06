@@ -51,7 +51,7 @@ class FinalResultViewController: UIViewController{
         setupResult()
         setupBackToMainScreenButton()
         setupBackgroundView()
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playSoundOfVictory), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(playSoundOfVictory), userInfo: nil, repeats: false)
     }
     
     //MARK: - Setups
@@ -91,5 +91,6 @@ class FinalResultViewController: UIViewController{
     
     @objc private func backToMainScreenButtonAction() {
         self.navigationController?.popToRootViewController(animated: true)
+        player.stop()
    }
 }

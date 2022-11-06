@@ -19,7 +19,7 @@ class LevelListTableViewCell: UITableViewCell {
     var question: Question! {
         didSet {
             titleLabel.text = question.number
-            if question.number.contains("⭐️") || question.number.contains("🌟") {
+            if question.number.contains("1 000") || question.number.contains("32 000") {
                 titleLabel.backgroundColor = .blue
                 titleLabel.textColor = .white
             } else {

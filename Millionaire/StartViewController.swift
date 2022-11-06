@@ -101,7 +101,7 @@ class StartViewController: UIViewController {
     @objc private func startButtonAction() {
         let gameViewController = GameViewController()
         self.navigationController?.pushViewController(gameViewController, animated: true)
-        var gameBrain = GameBrain()
+        let gameBrain = GameBrain()
         gameViewController.gameBrain = gameBrain
         gameBrain.getQuestion()
         playSound(resource: "waitForResponse")

@@ -11,7 +11,7 @@ class GameBrain {
     
     //MARK: - Properties
     var questions = Question.questions
-    var numberOfQuestion = 0
+    var numberOfQuestion = 14
     var numberOfQuestionText: String?
     var currentQuestion: String?
     var currentAnswerA: String?
@@ -39,7 +39,11 @@ class GameBrain {
         return check
     }
     
- func wonAmount() -> String {
+    func wonAmountWhenTachMoney() -> String {
+        return questions[numberOfQuestion - 1].number
+       }
+    
+ func wonAmountWhenEndTime() -> String {
         switch numberOfQuestion {
         case 0...5:
             return "\nВы ничего не выиграли 😕"

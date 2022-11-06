@@ -46,6 +46,7 @@ private extension LevelListViewController {
 @objc private extension LevelListViewController {
     @objc func gameOver() {
         navigationController?.popToRootViewController(animated: true)
+        player.stop()
     }
 }
 

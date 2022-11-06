@@ -92,7 +92,6 @@ class RuleViewController: UIViewController{
     }
     
     //MARK: - Setups
- 
         
     private func startTimerForShowScrollIndicator() {
         self.timerForShowScrollIndicator = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.showScrollIndicatorsInContacts), userInfo: nil, repeats: true)
