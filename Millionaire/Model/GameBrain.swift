@@ -11,7 +11,7 @@ class GameBrain {
     
     //MARK: - Properties
     var questions = Question.questions
-    var numberOfQuestion = 14
+    var numberOfQuestion = 0
     var numberOfQuestionText: String?
     var currentQuestion: String?
     var currentAnswerA: String?
