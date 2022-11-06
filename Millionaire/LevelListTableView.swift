@@ -3,7 +3,7 @@ import UIKit
 protocol LevelListTableViewDataSourceDelegate: AnyObject {
     func numberOfRowsInSection() -> Int
     func cellForRowAt(_ indexPath: IndexPath) -> Question
-    
+    func numberOfCompletedQuestions() -> Int
 }
 
 class LevelListTableView: UITableView {
@@ -43,7 +43,12 @@ extension LevelListTableView: UITableViewDataSource, UITableViewDelegate {
             fatalError("Error with casting type = \(LevelListTableViewCell.self)")
         }
         let content = dataSourceDelegate.cellForRowAt(indexPath)
+        print(dataSourceDelegate.numberOfCompletedQuestions())
         cell.question = content
+        let count = dataSourceDelegate.numberOfRowsInSection() - indexPath.row
+        if count <= dataSourceDelegate.numberOfCompletedQuestions() {
+            cell.titleLabel.backgroundColor = .systemGreen
+        }
         return cell
     }
     
