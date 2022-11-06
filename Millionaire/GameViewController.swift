@@ -340,13 +340,33 @@ class GameViewController: UIViewController {
         let correctAnswer = gameBrain?.currentAnswerCA
         switch correctAnswer?.prefix(1){
         case "A":
-            return "A – 70%, B – 15%, C – 3%, D – 12%"
+            return """
+                    A▫️▫️▫️▫️▫️▫️▫️70%
+                    B▫️▫️▫️___________15%
+                    C▫️_________________5%
+                    D▫️▫️_____________10%
+                    """
         case "B":
-            return "A – 15%, B – 70%, C – 3%, D – 12%"
+            return """
+                    A▫️▫️▫️___________15%
+                    B▫️▫️▫️▫️▫️▫️▫️70%
+                    C▫️_________________5%
+                    D▫️▫️_____________10%
+                    """
         case "C":
-            return "A – 3%, B – 15%, C – 70%, D – 12%"
+            return """
+                    A▫️_________________5%
+                    B▫️▫️▫️___________15%
+                    C▫️▫️▫️▫️▫️▫️▫️70%
+                    D▫️▫️_____________10%
+                    """
         case "D":
-            return "A – 12%, B – 15%, C – 3%, D – 70%"
+            return """
+                    A▫️▫️_____________10%
+                    B▫️▫️▫️___________15%
+                    C▫️_________________5%
+                    D▫️▫️▫️▫️▫️▫️▫️70%
+                    """
         case .none:
             print("some error occured")
         case .some(_):
