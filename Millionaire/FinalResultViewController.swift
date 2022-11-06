@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 class FinalResultViewController: UIViewController{
     
     //MARK: - UIElements
@@ -91,6 +90,6 @@ class FinalResultViewController: UIViewController{
     //MARK: - Actions
     
     @objc private func backToMainScreenButtonAction() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
    }
 }
