@@ -1,17 +1,10 @@
-//
-//  LevelListTableViewCell.swift
-//  Millionaire
-//
-//  Created by Даниил Симахин on 01.11.2022.
-//
-
 import UIKit
 
 class LevelListTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = String(describing: LevelListTableViewCell.self)
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let view = UILabel()
         view.text = "?"
         view.font = .systemFont(ofSize: 15)
@@ -26,15 +19,12 @@ class LevelListTableViewCell: UITableViewCell {
     var question: Question! {
         didSet {
             titleLabel.text = question.number
-            if let answer = question.isAnswered {
-                titleLabel.backgroundColor = answer ? .systemGreen : .systemRed
-            } else if question.number.contains("⭐️") || question.number.contains("🌟") {
+            if question.number.contains("⭐️") || question.number.contains("🌟") {
                 titleLabel.backgroundColor = .blue
                 titleLabel.textColor = .white
-            }else {
+            } else {
                 titleLabel.backgroundColor = .systemGray6
             }
-            
         }
     }
     
