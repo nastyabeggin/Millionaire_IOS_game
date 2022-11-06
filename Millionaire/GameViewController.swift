@@ -67,7 +67,7 @@ class GameViewController: UIViewController {
     private lazy var questionsLabel: UILabel = {
         let label = UILabel()
         label.text = gameBrain?.currentQuestion
-        label.numberOfLines = 5
+        label.numberOfLines = 6
         label.font = label.font.withSize(28)
         label.textColor = .white
         label.textAlignment = .center
@@ -244,7 +244,7 @@ class GameViewController: UIViewController {
     }
     
     @objc func goToLevelListViewController() {
-        if gameBrain!.numberOfQuestion < 15 {
+        if gameBrain!.numberOfQuestion < 14 {
             let levelListViewController = LevelListViewController()
             self.navigationController?.pushViewController(levelListViewController, animated: true)
         } else {
@@ -340,13 +340,13 @@ class GameViewController: UIViewController {
         let correctAnswer = gameBrain?.currentAnswerCA
         switch correctAnswer?.prefix(1){
         case "A":
-            return "70% – A, 15% – B, 3% – C, 12% – D"
+            return "A – 70%, B – 15%, C – 3%, D – 12%"
         case "B":
-            return "15% – A, 70% – B, 3% – C, 12% – D"
+            return "A – 15%, B – 70%, C – 3%, D – 12%"
         case "C":
-            return "3% – A, 15% – B, 70% – C, 12% – D"
+            return "A – 3%, B – 15%, C – 70%, D – 12%"
         case "D":
-            return "12% – A, 15% – B, 3% – C, 70% – D"
+            return "A – 12%, B – 15%, C – 3%, D – 70%"
         case .none:
             print("some error occured")
         case .some(_):
@@ -485,32 +485,32 @@ class GameViewController: UIViewController {
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
+            fiftyButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -90),
             fiftyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
             fiftyButton.widthAnchor.constraint(equalToConstant: 60),
             fiftyButton.heightAnchor.constraint(equalToConstant: 60),
 
-            hallHelpButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
+            hallHelpButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -90),
             hallHelpButton.leadingAnchor.constraint(equalTo: fiftyButton.trailingAnchor, constant: 40),
             hallHelpButton.widthAnchor.constraint(equalToConstant: 60),
             hallHelpButton.heightAnchor.constraint(equalToConstant: 60),
 
-            possibleErrorButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -100),
+            possibleErrorButton.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: -90),
             possibleErrorButton.leadingAnchor.constraint(equalTo: hallHelpButton.trailingAnchor, constant: 40),
             possibleErrorButton.widthAnchor.constraint(equalToConstant: 60),
             possibleErrorButton.heightAnchor.constraint(equalToConstant: 60),
 
-            timeLabel.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: 10),
+            timeLabel.bottomAnchor.constraint(equalTo: questionsLabel.topAnchor, constant: 30),
             timeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             timeLabel.widthAnchor.constraint(equalToConstant: 80),
             timeLabel.heightAnchor.constraint(equalToConstant: 80),
 
             questionsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            questionsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70),
+            questionsLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             questionsLabel.widthAnchor.constraint(equalToConstant: 330),
-            questionsLabel.heightAnchor.constraint(equalToConstant: 170),
+            questionsLabel.heightAnchor.constraint(equalToConstant: 200),
 
-            aButton.topAnchor.constraint(equalTo: questionsLabel.bottomAnchor, constant: 80),
+            aButton.topAnchor.constraint(equalTo: questionsLabel.bottomAnchor, constant: 60),
             aButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             aButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             aButton.heightAnchor.constraint(equalToConstant: 50),

@@ -11,7 +11,7 @@ class GameBrain {
     
     //MARK: - Properties
     var questions = Question.questions
-    var numberOfQuestion = 0
+    var numberOfQuestion = 14
     var numberOfQuestionText: String?
     var currentQuestion: String?
     var currentAnswerA: String?
@@ -35,7 +35,7 @@ class GameBrain {
     
     func checkAnswer(_ userAnswer: String) -> Bool {
         let check = userAnswer == currentAnswerCA
-        questions[numberOfQuestion].isAnswered = check
+        questions[numberOfQuestion - 1].isAnswered = check
         return check
     }
     
@@ -45,7 +45,7 @@ class GameBrain {
             return "Вы ничего не выиграли 😕"
         case 6...10:
             return "Ваш выигрыш 1 000 рублей!"
-        case 11...14:
+        case 11...15:
             return "Ваш выигрыш 32 000 рублей!"
         default:
             return ""

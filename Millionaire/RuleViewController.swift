@@ -69,7 +69,7 @@ class RuleViewController: UIViewController{
         let button = UIButton()
         button.backgroundColor = .yellow
         button.layer.cornerRadius = 15
-        button.setTitle("НА ГЛАВНЫЙ ЭКРАН", for: .normal)
+        button.setTitle("ГЛАВНОЕ МЕНЮ", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.addTarget(self, action: #selector(backToMainScreenButtonAction), for: .touchUpInside)

@@ -9,7 +9,6 @@ import UIKit
 
 
 class FinalResultViewController: UIViewController{
-    var result: String = ""
     
     //MARK: - UIElements
     
@@ -20,28 +19,22 @@ class FinalResultViewController: UIViewController{
         return imageView
     }()
     
-    private lazy var resultHeading: UILabel = {
+    private lazy var result: UILabel = {
         let heading = UILabel()
-        heading.text = result
+        heading.text = "Вы выиграли \n\n1 000 000 \n\nрублей!"
+        heading.font = UIFont.systemFont(ofSize: 45, weight: .semibold)
+        heading.numberOfLines = 5
+        heading.textAlignment = .center
         heading.textColor = .white
-        heading.font = UIFont.systemFont(ofSize: 40, weight: .semibold)
         heading.translatesAutoresizingMaskIntoConstraints = false
         return heading
-    }()
-    
-    private lazy var resultContent: UILabel = {
-        let content = UILabel()
-        content.text = ""
-        content.backgroundColor = .clear
-        content.numberOfLines = 0
-        return content
     }()
     
     private lazy var backToMainScreenButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .yellow
         button.layer.cornerRadius = 15
-        button.setTitle("НА ГЛАВНЫЙ ЭКРАН", for: .normal)
+        button.setTitle("ГЛАВНОЕ МЕНЮ", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.addTarget(self, action: #selector(backToMainScreenButtonAction), for: .touchUpInside)
@@ -56,32 +49,25 @@ class FinalResultViewController: UIViewController{
         self.navigationItem.hidesBackButton = true
         
         setupHierarchy()
-        setupResultHeading()
-        setupResultContent()
+        setupResult()
         setupBackToMainScreenButton()
         setupBackgroundView()
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(playSoundOfVictory), userInfo: nil, repeats: false)
     }
     
     //MARK: - Setups
     
     private func setupHierarchy() {
         view.addSubview(backgroundView)
-        view.addSubview(resultHeading)
-        view.addSubview(resultContent)
+        view.addSubview(result)
         view.addSubview(backToMainScreenButton)
     }
     
-    private func setupResultHeading(){
-        self.resultHeading.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        self.resultHeading.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        self.resultHeading.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    }
-    
-    private func setupResultContent(){
-        self.resultContent.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
-        self.resultContent.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        self.resultContent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
-        self.resultContent.heightAnchor.constraint(equalToConstant: 500).isActive = true
+    private func setupResult(){
+        self.result.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        self.result.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120).isActive = true
+        self.result.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        self.result.widthAnchor.constraint(equalToConstant: 300).isActive = true
     }
     
     private func setupBackToMainScreenButton() {
@@ -96,6 +82,10 @@ class FinalResultViewController: UIViewController{
         self.backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         self.backgroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         self.backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    @objc private func playSoundOfVictory() {
+        playSound(resource: "victoryMillion")
     }
     
     //MARK: - Actions
