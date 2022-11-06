@@ -6,8 +6,20 @@ protocol LevelListViewControllerDelegate: AnyObject {
 
 class LevelListViewController: UIViewController {
     
-    var delegate: LevelListViewControllerDelegate!
-    var questions = Question.questions
+    let delegate: LevelListViewControllerDelegate!
+    let questions: [Question]
+    let numberOfCompletedQuestions: Int
+    
+    init(delegate: LevelListViewControllerDelegate!, questions: [Question] = Question.questions, numberOfCompletedQuestions: Int) {
+        self.delegate = delegate
+        self.questions = questions
+        self.numberOfCompletedQuestions = numberOfCompletedQuestions
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         let view = LevelListView()
@@ -28,8 +40,13 @@ private extension LevelListViewController {
 }
 
 extension LevelListViewController: LevelListViewDelegate {
+    func getNumberOfCompletedQuestions() -> Int {
+        return numberOfCompletedQuestions
+    }
+    
     func nextLevelButtonTapped() {
         delegate.nextLevel()
+        dismiss(animated: true)
     }
     
     func getNumberOfQuestions() -> Int {
